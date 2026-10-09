@@ -1,0 +1,1788 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Se la Camera degli Stati Uniti la pensasse come te, chi siederebbe nei suoi 435 seggi? Test politico con 100 affermazioni e 26 politici americani.">
+<title>La tua Camera USA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: colonna di lettura stretta, come un modulo parlamentare; l'aula a semicerchio e la mappa dei politici sono gli unici elementi larghi. */
+:root {
+  --carta: #f7f7f4;
+  --foglio: #ffffff;
+  --inchiostro: #17203a;
+  --grigio: #5b6274;
+  --filo: #dcdde3;
+  --accento: #a3242f;
+  --blu: #24438f;
+  --vuoto: #d7d9e0;
+  --luce: 1;
+  --font-titolo: "Libre Caslon Text", "Baskerville", Georgia, serif;
+  --font-testo: "Libre Franklin", "Franklin Gothic Book", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --carta: #11141d; --foglio: #191d29; --inchiostro: #e9e9ee; --grigio: #a3a8b7;
+    --filo: #2d3242; --accento: #e0616b; --blu: #8aa5ea; --vuoto: #343a4c; --luce: 1.35; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --carta: #11141d; --foglio: #191d29; --inchiostro: #e9e9ee; --grigio: #a3a8b7;
+  --filo: #2d3242; --accento: #e0616b; --blu: #8aa5ea; --vuoto: #343a4c; --luce: 1.35; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--carta); color: var(--inchiostro); font-family: var(--font-testo); font-size: 16px; line-height: 1.55; padding-inline: 16px; padding-block: 0 48px; }
+.pagina { max-width: 880px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-titolo); font-weight: 700; text-wrap: balance; line-height: 1.18; margin: 0; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.7rem); }
+h2 { font-size: clamp(1.45rem, 3.6vw, 1.95rem); }
+h3 { font-size: 1.25rem; }
+p { margin: 0; }
+button, select { font: inherit; }
+:focus-visible { outline: 3px solid var(--blu); outline-offset: 2px; }
+
+.striscia { height: 8px; margin-inline: -16px; background: repeating-linear-gradient(180deg, var(--accento) 0 4px, var(--foglio) 4px 8px); border-bottom: 1px solid var(--filo); }
+.testata { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-block: 16px; border-bottom: 1px solid var(--filo); margin-bottom: 32px; }
+.marchio { font-family: var(--font-titolo); font-weight: 700; font-size: 1.15rem; color: var(--inchiostro); background: none; border: 0; padding: 0; cursor: pointer; }
+.marchio small { font-family: var(--font-testo); font-weight: 600; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accento); margin-left: 8px; }
+.avanzamento { display: flex; align-items: center; gap: 12px; font-size: .85rem; color: var(--grigio); font-variant-numeric: tabular-nums; }
+.tacche { display: flex; gap: 3px; list-style: none; margin: 0; padding: 0; }
+.tacche li { width: 14px; height: 6px; background: var(--vuoto); }
+.tacche li.fatto { background: var(--blu); }
+.tacche li.ora { background: var(--accento); }
+
+.etichetta { font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accento); }
+.sommario { font-size: 1.08rem; color: var(--grigio); max-width: 62ch; }
+.apertura { display: grid; gap: 28px; }
+.apertura .testi { display: grid; gap: 16px; }
+.scelte { display: flex; flex-wrap: wrap; gap: 20px; }
+.scelta { display: grid; gap: 6px; }
+.scelta p { font-size: .88rem; color: var(--grigio); }
+.patti { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: .95rem; max-width: 64ch; }
+.patti li { display: flex; gap: 10px; }
+.patti li::before { content: "★"; color: var(--accento); font-size: .8rem; line-height: 1.9; }
+.volti-apertura { font-size: .9rem; color: var(--grigio); max-width: 64ch; }
+
+.bottone { background: var(--inchiostro); color: var(--carta); border: 2px solid var(--inchiostro); padding: 10px 20px; font-weight: 600; cursor: pointer; border-radius: 2px; }
+.bottone:hover { background: var(--blu); border-color: var(--blu); color: #fff; }
+.bottone.secondario { background: transparent; color: var(--inchiostro); }
+.bottone.secondario:hover { background: var(--inchiostro); color: var(--carta); border-color: var(--inchiostro); }
+.bottone.testuale { background: none; border-color: transparent; color: var(--grigio); text-decoration: underline; padding-inline: 4px; }
+.bottone.testuale:hover { color: var(--inchiostro); background: none; border-color: transparent; }
+.comandi { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+
+.foglio { display: grid; gap: 14px; }
+.guida { color: var(--grigio); max-width: 66ch; }
+.priorita { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; margin-top: 8px; }
+.priorita label { display: flex; gap: 10px; align-items: center; padding: 12px 14px; background: var(--foglio); border: 1px solid var(--filo); cursor: pointer; }
+.priorita label:has(input:checked) { border-color: var(--blu); box-shadow: inset 4px 0 0 var(--blu); }
+.priorita label:has(input:disabled) { opacity: .5; cursor: not-allowed; }
+.priorita input { accent-color: var(--blu); width: 18px; height: 18px; }
+.conteggio { font-size: .9rem; color: var(--grigio); }
+
+.affermazione { background: var(--foglio); border: 1px solid var(--filo); padding: 18px; display: grid; gap: 10px; }
+.affermazione + .affermazione { margin-top: 10px; }
+.affermazione.manca { border-color: var(--accento); box-shadow: inset 4px 0 0 var(--accento); }
+.affermazione.saltata .frase { color: var(--grigio); }
+.affermazione .num { font-size: .75rem; color: var(--grigio); font-variant-numeric: tabular-nums; }
+.affermazione .frase { font-family: var(--font-titolo); font-size: 1.14rem; line-height: 1.4; }
+.affermazione .ctx { font-size: .86rem; color: var(--grigio); line-height: 1.5; max-width: 70ch; }
+.scala { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; border: 0; padding: 0; margin: 4px 0 0; }
+.scala legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.scala label { display: block; position: relative; }
+.scala input { position: absolute; opacity: 0; inset: 0; }
+.scala span { display: block; text-align: center; padding: 9px 2px; font-size: .8rem; border: 1px solid var(--filo); cursor: pointer; line-height: 1.2; }
+.scala label:hover span { border-color: var(--inchiostro); }
+.scala input:focus-visible + span { outline: 3px solid var(--blu); outline-offset: 1px; }
+.scala input:checked + span { background: var(--inchiostro); color: var(--carta); border-color: var(--inchiostro); font-weight: 600; }
+.scala .salta { grid-column: 1 / -1; justify-self: end; }
+.scala .salta span { border: 0; padding: 4px 2px; color: var(--grigio); text-decoration: underline; font-size: .78rem; }
+.scala .salta input:checked + span { background: none; color: var(--inchiostro); font-weight: 700; text-decoration: none; }
+.scala .salta input:checked + span::before { content: "✓ "; }
+.avviso { color: var(--accento); font-weight: 600; }
+
+/* Risultato */
+.aula { background: var(--foglio); border: 1px solid var(--filo); padding: 24px 20px; display: grid; gap: 16px; }
+.grafico svg { width: 100%; height: auto; display: block; }
+.seggio { transition: opacity .2s; filter: brightness(var(--luce)); }
+.grafico.evidenzia .seggio:not(.scelto) { opacity: .16; }
+.didascalia { text-align: center; font-size: .85rem; color: var(--grigio); min-height: 1.3em; }
+.sotto { color: var(--grigio); }
+.gruppi { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 24px; }
+.gruppi li { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--filo); cursor: pointer; }
+.gruppi li.fuori { color: var(--grigio); }
+.pallino { width: 12px; height: 12px; border-radius: 50%; background: var(--c); align-self: center; display: inline-block; filter: brightness(var(--luce)); flex: none; }
+.gruppi li.fuori .pallino { background: transparent; box-shadow: inset 0 0 0 2px var(--c); }
+.gruppi .nome { font-weight: 600; min-width: 0; }
+.gruppi .nome small { display: block; font-weight: 400; color: var(--grigio); font-size: .78rem; }
+.gruppi .n { font-family: var(--font-titolo); font-weight: 700; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.partiti { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.partito { padding: 12px 14px; border: 1px solid var(--filo); display: grid; gap: 2px; }
+.partito .cifra { font-family: var(--font-titolo); font-size: 1.8rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.partito .dida { font-size: .8rem; color: var(--grigio); }
+.partito.d { box-shadow: inset 0 4px 0 #2f6fc7; }
+.partito.r { box-shadow: inset 0 4px 0 #c0313b; }
+.azioni { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.esito { font-size: .88rem; color: var(--grigio); min-height: 1.3em; }
+.copia-riserva { width: 100%; min-height: 150px; font: inherit; font-size: .85rem; padding: 10px; background: var(--carta); color: var(--inchiostro); border: 1px solid var(--filo); }
+
+.dettaglio { display: grid; gap: 40px; margin-top: 40px; }
+.blocco { display: grid; gap: 12px; min-width: 0; }
+.blocco > p { color: var(--grigio); max-width: 68ch; }
+
+.podio { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.podio li { display: grid; grid-template-columns: 28px minmax(0, 1fr) 56px; gap: 4px 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--filo); }
+.podio .pos { font-family: var(--font-titolo); font-weight: 700; font-size: 1.1rem; color: var(--grigio); font-variant-numeric: tabular-nums; }
+.podio .chi { font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.podio .chi small { font-weight: 400; color: var(--grigio); font-size: .82rem; width: 100%; }
+.podio .pct { text-align: right; font-family: var(--font-titolo); font-weight: 700; font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.podio .pista { grid-column: 2 / -1; }
+.podio .doc { grid-column: 2 / -1; font-size: .78rem; color: var(--grigio); }
+.podio li.primo .chi { font-size: 1.2rem; }
+.lontani { font-size: .92rem; color: var(--grigio); }
+.lontani strong { color: var(--inchiostro); }
+.disaccordi { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.disaccordi li { padding: 12px 14px; background: var(--foglio); border: 1px solid var(--filo); display: grid; gap: 4px; }
+.disaccordi .frase { font-family: var(--font-titolo); }
+.disaccordi .confronto { font-size: .85rem; color: var(--grigio); }
+.disaccordi .confronto b { color: var(--inchiostro); font-weight: 600; }
+
+.mappa { background: var(--foglio); border: 1px solid var(--filo); padding: 8px; }
+.mappa svg { width: 100%; height: auto; display: block; color: var(--inchiostro); }
+.mappa .punto { filter: brightness(var(--luce)); }
+.mappa .etichetta-mappa { font-family: var(--font-testo); font-size: 13px; fill: var(--inchiostro); paint-order: stroke; stroke: var(--foglio); stroke-width: 4px; stroke-linejoin: round; }
+.mappa .tu { font-weight: 700; }
+.mappa .asse { font-family: var(--font-testo); font-size: 11px; fill: var(--grigio); letter-spacing: .04em; }
+.legenda-mappa { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .8rem; color: var(--grigio); }
+.legenda-mappa span { display: inline-flex; align-items: center; gap: 6px; }
+
+.coalizioni, .vicinanze { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.coalizione { display: grid; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid var(--filo); }
+.coalizione .riga { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.coalizione .chi { font-weight: 600; }
+.coalizione .quanti { font-size: .85rem; color: var(--grigio); font-variant-numeric: tabular-nums; }
+.pista { position: relative; display: flex; height: 10px; background: var(--vuoto); }
+.pista span { background: var(--c, var(--blu)); height: 100%; filter: brightness(var(--luce)); }
+.pista .meta { position: absolute; left: 50.115%; top: -3px; bottom: -3px; width: 2px; background: var(--inchiostro); }
+.podio .pista, .vicinanze .pista { height: 6px; }
+.vicinanze li { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 6px 12px; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--filo); }
+.vicinanze .nome { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.vicinanze .nome small { font-weight: 400; color: var(--grigio); }
+.vicinanze .pct { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.vicinanze .pista, .vicinanze .profilo, .vicinanze .verifica { grid-column: 1 / -1; }
+.vicinanze .profilo { font-size: .86rem; color: var(--grigio); }
+.vicinanze .verifica { font-size: .78rem; color: var(--grigio); }
+
+.scorre { overflow-x: auto; border: 1px solid var(--filo); background: var(--foglio); }
+table.temi { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .9rem; }
+.temi th, .temi td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--filo); vertical-align: top; }
+.temi thead th { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grigio); font-weight: 600; }
+.temi .chi-g { display: inline-flex; align-items: center; gap: 6px; margin-right: 10px; }
+.temi .pct { color: var(--grigio); font-variant-numeric: tabular-nums; }
+
+details.metodo { border-top: 2px solid var(--inchiostro); padding-top: 14px; }
+details.metodo summary { font-family: var(--font-titolo); font-weight: 700; font-size: 1.2rem; cursor: pointer; }
+details.metodo > div { display: grid; gap: 14px; margin-top: 14px; }
+details.metodo ol { padding-left: 1.2em; display: grid; gap: 6px; max-width: 72ch; margin: 0; }
+.nota { font-size: .9rem; color: var(--grigio); max-width: 72ch; }
+.esplora { display: grid; gap: 10px; padding: 14px; background: var(--foglio); border: 1px solid var(--filo); }
+.esplora label { font-weight: 600; }
+.esplora select { padding: 8px; border: 1px solid var(--filo); background: var(--carta); color: var(--inchiostro); max-width: 100%; }
+.esplora ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: .88rem; }
+.esplora .val { font-weight: 600; font-variant-numeric: tabular-nums; }
+.tabella-scorrevole { overflow-x: auto; border: 1px solid var(--filo); background: var(--foglio); max-height: 70vh; }
+table.posizioni { border-collapse: collapse; font-size: .8rem; width: 100%; min-width: 760px; }
+.posizioni th, .posizioni td { padding: 6px 8px; border-bottom: 1px solid var(--filo); text-align: center; font-variant-numeric: tabular-nums; vertical-align: top; }
+.posizioni td:first-child, .posizioni th:first-child { text-align: left; }
+.posizioni td:first-child { min-width: 300px; }
+.posizioni td .fonte { display: block; color: var(--grigio); font-size: .74rem; margin-top: 3px; }
+.posizioni thead th { position: sticky; top: 0; background: var(--foglio); z-index: 1; }
+.posizioni th .pallino { width: 8px; height: 8px; margin-right: 4px; }
+.posizioni tr.tema-riga th { text-align: left; background: var(--carta); font-family: var(--font-titolo); position: static; }
+.posizioni td.stima { color: var(--grigio); font-style: italic; }
+.legenda { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .82rem; color: var(--grigio); }
+.piede { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--filo); font-size: .82rem; color: var(--grigio); display: grid; gap: 6px; }
+.piede a { color: inherit; }
+
+@media (max-width: 560px) {
+  .scala span { font-size: .7rem; padding: 8px 1px; }
+  .partiti { grid-template-columns: 1fr; }
+  .aula { padding: 18px 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .seggio { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="pagina">
+  <div class="striscia" aria-hidden="true"></div>
+  <header class="testata">
+    <button class="marchio" id="marchio" type="button">La tua Camera <small>USA</small></button>
+    <div class="avanzamento" id="avanzamento" hidden>
+      <span id="avanzamento-testo"></span>
+      <ol class="tacche" id="tacche" aria-hidden="true"></ol>
+    </div>
+  </header>
+
+  <main>
+    <!-- 0. Apertura -->
+    <section class="apertura" id="s-apertura">
+      <div class="testi">
+        <p class="etichetta">Camera dei Rappresentanti · 435 seggi · verifica di ottobre 2026</p>
+        <h1>Se la Camera degli Stati Uniti la pensasse come te, chi siederebbe nei suoi 435 seggi?</h1>
+        <p class="sommario">Rispondi su dieci temi della politica americana del 2025-2026, dalla guerra con l’Iran ai dazi bocciati dalla Corte Suprema. Vedrai come si dividerebbe l’aula tra otto correnti di Democratici e Repubblicani e quali politici americani la pensano più come te.</p>
+        <div class="scelte">
+          <div class="scelta">
+            <button class="bottone" type="button" data-modo="rapido">Test rapido</button>
+            <p><span id="n-rapido"></span> affermazioni, circa 10 minuti</p>
+          </div>
+          <div class="scelta">
+            <button class="bottone secondario" type="button" data-modo="completo">Test completo</button>
+            <p><span id="n-completo"></span> affermazioni, circa 20 minuti</p>
+          </div>
+        </div>
+        <ul class="patti">
+          <li><span>Ogni affermazione parte da un voto, una legge o una decisione reale, spiegata in una riga.</span></li>
+          <li><span>Otto correnti, dalla sinistra socialista alla destra libertaria, e <span id="n-politici"></span> politici di riferimento.</span></li>
+          <li><span>Puoi saltare le domande su cui non hai un’opinione: non pesano nel calcolo.</span></li>
+          <li><span>Le risposte restano nel tuo browser: la pagina non salva e non invia nulla.</span></li>
+        </ul>
+        <p class="volti-apertura" id="volti-apertura"></p>
+      </div>
+      <div class="grafico" id="emiciclo-vuoto" aria-hidden="true"></div>
+    </section>
+
+    <!-- 1. Priorità -->
+    <section class="foglio" id="s-priorita" hidden>
+      <p class="etichetta">Le tue priorità</p>
+      <h2 tabindex="-1">Quali temi contano di più per te?</h2>
+      <p class="guida">Scegline fino a tre: nel calcolo peseranno il doppio. Puoi anche non sceglierne nessuno.</p>
+      <div class="priorita" id="lista-priorita"></div>
+      <p class="conteggio" id="conteggio-priorita" aria-live="polite"></p>
+      <div class="comandi">
+        <button class="bottone testuale" type="button" data-vai="indietro">Indietro</button>
+        <button class="bottone" type="button" data-vai="avanti">Vai alle affermazioni</button>
+      </div>
+    </section>
+
+    <!-- 2. Temi -->
+    <section class="foglio" id="s-tema" hidden>
+      <p class="etichetta" id="tema-etichetta"></p>
+      <h2 tabindex="-1" id="tema-titolo"></h2>
+      <p class="guida">Quanto sei d’accordo? Se non hai un’opinione, scegli «Non so, salta».</p>
+      <div id="tema-affermazioni"></div>
+      <p class="avviso" id="tema-avviso" role="alert" hidden></p>
+      <div class="comandi">
+        <button class="bottone testuale" type="button" data-vai="indietro">Indietro</button>
+        <button class="bottone" type="button" data-vai="avanti" id="b-avanti">Tema successivo</button>
+      </div>
+    </section>
+
+    <!-- 3. Risultato -->
+    <section id="s-risultato" hidden>
+      <div class="aula">
+        <p class="etichetta">Il tuo emiciclo</p>
+        <h2 tabindex="-1" id="verdetto"></h2>
+        <p class="sotto" id="verdetto-sotto"></p>
+        <div class="grafico" id="grafico"></div>
+        <p class="didascalia" id="didascalia" aria-live="polite"></p>
+        <ul class="gruppi" id="gruppi"></ul>
+        <div class="partiti" id="partiti"></div>
+        <div class="azioni">
+          <button class="bottone" type="button" id="b-copia">Copia il risultato</button>
+          <button class="bottone secondario" type="button" id="b-completa" hidden></button>
+          <button class="bottone testuale" type="button" id="b-rifai">Rifai il test</button>
+        </div>
+        <p class="esito" id="esito" aria-live="polite"></p>
+        <textarea class="copia-riserva" id="copia-riserva" readonly hidden aria-label="Testo del risultato da copiare"></textarea>
+      </div>
+
+      <div class="dettaglio">
+        <div class="blocco">
+          <h3>I politici più vicini a te</h3>
+          <p>Affinità con le posizioni di <span id="n-politici-2"></span> politici americani, sulle sole affermazioni a cui hai risposto. Per ognuno trovi quante delle sue posizioni sono documentate da voti o dichiarazioni; le altre sono quelle della sua corrente.</p>
+          <ol class="podio" id="podio"></ol>
+          <p class="lontani" id="lontani"></p>
+        </div>
+
+        <div class="blocco" id="blocco-disaccordi">
+          <h3 id="titolo-disaccordi"></h3>
+          <ul class="disaccordi" id="disaccordi"></ul>
+        </div>
+
+        <div class="blocco">
+          <h3>Dove ti collochi</h3>
+          <p>La mappa riassume le risposte in due direzioni, calcolate dalle posizioni dei politici. In orizzontale la distanza tra sinistra e destra. In verticale una frattura che attraversa i due partiti: in alto chi contesta l’establishment, i limiti al potere del presidente o gli impegni militari all’estero, come Sanders, Trump o Greene; in basso chi difende istituzioni e alleanze tradizionali, come Collins, Fetterman o McConnell.</p>
+          <div class="mappa" id="mappa"></div>
+          <div class="legenda-mappa" id="legenda-mappa"></div>
+        </div>
+
+        <div class="blocco">
+          <h3>Chi elegge lo Speaker</h3>
+          <p id="governo-testo"></p>
+          <ul class="coalizioni" id="coalizioni"></ul>
+        </div>
+
+        <div class="blocco">
+          <h3>Quanto sei vicino a ogni corrente</h3>
+          <p>L’affinità misura quanto le tue risposte coincidono con le posizioni attribuite a ciascuna corrente: 100% vuol dire identiche, 0% opposte.</p>
+          <ul class="vicinanze" id="vicinanze"></ul>
+        </div>
+
+        <div class="blocco">
+          <h3>Tema per tema</h3>
+          <p>La corrente e il politico più vicini a te su ogni argomento. Se più correnti sono alla pari, le trovi tutte.</p>
+          <div class="scorre" tabindex="0" role="region" aria-label="Risultato tema per tema">
+            <table class="temi" id="temi"></table>
+          </div>
+        </div>
+
+        <details class="metodo" id="metodo">
+          <summary>Come funziona il calcolo e da dove vengono le posizioni</summary>
+          <div>
+            <ol>
+              <li>Ogni risposta vale da −2 (per niente d’accordo) a +2 (del tutto d’accordo). Le domande saltate non contano.</li>
+              <li>A ciascuna corrente e a ciascun politico è assegnata una posizione sulla stessa scala, affermazione per affermazione.</li>
+              <li>L’affinità è 100% meno la distanza media tra le tue risposte e quelle posizioni. I temi prioritari pesano il doppio.</li>
+              <li>L’affinità con le correnti diventa una quota di «voti»: più sei vicino a una corrente rispetto alle altre, più la sua quota cresce. Sotto il 3% si resta fuori dall’aula.</li>
+              <li>I 435 seggi sono ripartiti con il metodo D’Hondt. Nella realtà la Camera si elegge in collegi uninominali: qui il sistema è proporzionale per mostrare le sfumature.</li>
+              <li>Gli assi della mappa sono le due componenti principali delle posizioni dei politici: la prima spiega circa tre quarti delle differenze, la seconda circa un ottavo.</li>
+            </ol>
+            <p class="nota"><strong>Livelli di verifica.</strong> Ogni posizione ha un livello: voto, legge o atto ufficiale; dichiarazione pubblica o indicazione indiretta; stima redazionale coerente con la linea nota. Nella tabella le stime sono in corsivo e segnate con un asterisco. Le correnti non sono gruppi formali: molti eletti fanno parte di più caucus. Fonti verificate a ottobre 2026. Gioco divulgativo, senza valore scientifico né predittivo.</p>
+            <div class="esplora">
+              <label for="sel-politico">Le posizioni documentate di un politico</label>
+              <select id="sel-politico"></select>
+              <p class="nota" id="esplora-conto"></p>
+              <ul id="esplora-lista"></ul>
+            </div>
+            <div class="legenda" id="legenda"></div>
+            <div class="tabella-scorrevole" tabindex="0" role="region" aria-label="Tabella delle posizioni delle correnti">
+              <table class="posizioni" id="tabella"></table>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="piede">
+    <p>Gioco divulgativo, senza valore scientifico né predittivo. Le correnti sono raggruppamenti ideologici dentro i due partiti, non gruppi parlamentari ufficiali; le posizioni dei politici non documentate sono stime.</p>
+    <p>Ispirato a «<a href="https://angrisanidj.github.io/il-tuo-emiciclo/" target="_blank" rel="noopener">Il tuo emiciclo</a>» di Daniele Angrisani e a «Tu hemiciclo» di <a href="https://objetivo176.es/test" target="_blank" rel="noopener">Objetivo 176</a>.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+/* ============================================================
+   DATI DEL TEST «La tua Camera USA» — verifica di ottobre 2026.
+
+   CORRENTI: otto anime di Democratici e Repubblicani, nell'ordine in cui
+   siederebbero da sinistra a destra: SOC, PROG, DEM, CEN, RMOD, RCON, AF, DR.
+
+   p   = posizione da -2 (per niente d'accordo) a +2 (del tutto d'accordo),
+         una per corrente, nello stesso ordine.
+   liv = livello di verifica, una lettera per corrente:
+         a = voto alla Camera o al Senato, legge, ordine esecutivo o atto ufficiale
+         b = dichiarazioni pubbliche riportate dalla stampa, o voto su un testo
+             più ampio o diverso dall'affermazione (indicazione indiretta)
+         c = stima redazionale coerente con la linea nota (segnata con *)
+   ctx   = riga di contesto mostrata durante il test.
+   fonte = riepilogo delle fonti mostrato nella tabella delle posizioni.
+   base  = true -> anche nel test rapido.
+   ============================================================ */
+
+var GRUPPI = [
+  { id: 'SOC', cod: 'Soc', nome: 'Sinistra socialista', partito: 'd', colore: '#4b2c91',
+    volti: 'Sanders, Ocasio-Cortez, Mamdani',
+    profilo: 'Sanità pubblica per tutti, tasse sui miliardari, Green New Deal, stop alle armi offensive a Israele e all’ICE così com’è.' },
+  { id: 'PROG', cod: 'Prog', nome: 'Progressisti', partito: 'd', colore: '#2f59c4',
+    volti: 'Warren, Khanna, Raskin',
+    profilo: 'Antitrust contro i grandi gruppi, patrimoniale, sindacati più forti, difesa delle istituzioni dai poteri del presidente.' },
+  { id: 'DEM', cod: 'Dem', nome: 'Democratici', partito: 'd', colore: '#3f8fdc',
+    volti: 'Harris, Newsom, Jeffries, Schumer',
+    profilo: 'La linea della leadership: difesa di Obamacare e Medicaid, aborto legale, controlli sulle armi, NATO e Ucraina, tasse più alte sulle imprese.' },
+  { id: 'CEN', cod: 'DMod', nome: 'Democratici moderati', partito: 'd', colore: '#8cc0ea',
+    volti: 'Fetterman, Shapiro, Golden',
+    profilo: 'Dalla parte dei lavoratori su salari e sindacati, ma duri su confine e criminalità, filo-israeliani e favorevoli a gas e fracking.' },
+  { id: 'RMOD', cod: 'RMod', nome: 'Repubblicani moderati', partito: 'r', colore: '#f0a091',
+    volti: 'Collins, Murkowski, Fitzpatrick',
+    profilo: 'Eletti in territori in bilico: votano spesso con il partito, ma hanno rotto con Trump su dazi, guerra in Iran, sussidi sanitari e aiuti esteri.' },
+  { id: 'RCON', cod: 'Cons', nome: 'Conservatori tradizionali', partito: 'r', colore: '#d4534b',
+    volti: 'McConnell, Pence, Haley',
+    profilo: 'La destra di Reagan: libero mercato e libero scambio, difesa forte, NATO e Ucraina, linea dura sull’Iran, valori religiosi.' },
+  { id: 'AF', cod: 'AF', nome: 'America First', partito: 'r', colore: '#b0202c',
+    volti: 'Trump, Vance, Johnson, Hawley',
+    profilo: 'La linea di Trump: dazi, espulsioni di massa, più poteri al presidente, guerra all’Iran ma stop agli aiuti all’Ucraina, populismo economico.' },
+  { id: 'DR', cod: 'Lib', nome: 'Destra libertaria e populista', partito: 'r', colore: '#6a1622',
+    volti: 'Greene, Massie, Rand Paul',
+    profilo: 'Stato minimo e debito zero, contro guerre e aiuti all’estero, contro i dazi e i vaccini obbligatori; spesso in rotta con Trump.' }
+];
+
+var TEMI = [
+  { id: 'tasse', nome: 'Tasse e debito', aff: [
+    { id: 'patrimoniale', base: true,
+      t: 'Serve una tassa annuale sui patrimoni più grandi, oltre i 50 milioni di dollari.',
+      ctx: 'È la proposta dell’Ultra-Millionaire Tax Act di Elizabeth Warren: 2% all’anno sopra i 50 milioni, di più per i miliardari. Negli Stati Uniti oggi non esiste un’imposta sul patrimonio.',
+      p: [ 2,  2,  1, -1, -2, -2, -2, -2], liv: 'babccbbc',
+      fonte: 'Proposte di Warren (Senato) e Sanders; Mamdani per tasse più alte sui ricchi a New York; Newsom contrario alla patrimoniale sui miliardari proposta in California (2026); repubblicani contrari.' },
+    { id: 'tcja', base: true,
+      t: 'I tagli fiscali del 2017, resi permanenti nel 2025, vanno mantenuti anche per i redditi più alti.',
+      ctx: 'La legge di bilancio di Trump del luglio 2025, la «One Big Beautiful Bill», ha reso permanenti le aliquote ridotte nel 2017. È passata 218 a 214 alla Camera e 51 a 50 al Senato, con il voto decisivo di Vance.',
+      p: [-2, -2, -2, -2,  1,  2,  2,  1], liv: 'bbbbbbab',
+      fonte: 'Voti finali sulla legge di bilancio (3 luglio 2025): democratici tutti contrari; contrari tra i repubblicani Massie e Fitzpatrick alla Camera, Paul, Tillis e Collins al Senato, per motivi diversi dalle aliquote (debito, Medicaid).' },
+    { id: 'debito', base: true,
+      t: 'Il debito pubblico va ridotto subito, anche a costo di tagliare spese popolari.',
+      ctx: 'Il debito federale ha superato i 38.000 miliardi di dollari nell’ottobre 2025. Secondo l’ufficio di bilancio del Congresso (CBO), la legge di bilancio del 2025 lo aumenta di altri 3.400 miliardi in dieci anni.',
+      p: [-2, -2, -1,  1,  1,  1,  0,  2], liv: 'cccbcbbb',
+      fonte: 'Massie e Paul hanno votato contro la legge di bilancio del 2025 per l’aumento del debito; Blue Dogs per il rigore di bilancio; stima CBO (luglio 2025).' },
+    { id: 'impresa', base: true,
+      t: 'L’aliquota sui profitti delle imprese va alzata dall’attuale 21% al 28%.',
+      ctx: 'Il 21% è in vigore dalla riforma del 2017. Biden e Kamala Harris proponevano il 28%; Trump vorrebbe scendere al 15% per chi produce negli Stati Uniti.',
+      p: [ 2,  2,  2,  0, -2, -2, -2, -2], liv: 'bbbccbbc',
+      fonte: 'Programma di Harris (2024); proposte di Trump (2024-25); Mamdani per imposte più alte sulle imprese a New York.' },
+    { id: 'milionari', base: true,
+      t: 'Per chi guadagna più di un milione di dollari l’anno l’aliquota federale sul reddito va alzata.',
+      ctx: 'Oggi l’aliquota massima è il 37%. Nel maggio 2025 Trump ha detto che gli sarebbe andato bene alzarla per i redditi più alti, ma l’idea è stata accantonata.',
+      p: [ 2,  2,  2,  1,  0, -2,  0, -2], liv: 'bbbcccbc',
+      fonte: 'Dichiarazioni di Trump (maggio 2025); proposta di Mamdani di un’imposta del 2% sui redditi oltre il milione a New York.' },
+    { id: 'mance',
+      t: 'Mance e straordinari devono restare esentasse anche dopo il 2028.',
+      ctx: 'La legge di bilancio del 2025 permette di dedurre fino a 25.000 dollari di mance e 12.500 di straordinari, ma solo fino al 2028. Anche Kamala Harris aveva proposto di non tassare le mance.',
+      p: [ 0,  0,  1,  1,  2,  1,  2,  1], liv: 'cccccbac',
+      fonte: 'Legge di bilancio del 2025; programma di Harris (2024).' },
+    { id: 'successione',
+      t: 'L’imposta federale di successione va abolita del tutto.',
+      ctx: 'Dal 2026 colpisce solo le eredità oltre 15 milioni di dollari a persona: la soglia è stata alzata in modo permanente dalla legge di bilancio del 2025.',
+      p: [-2, -2, -2, -1,  0,  1,  1,  2], liv: 'cccccccc',
+      fonte: 'Stima.' },
+    { id: 'carried',
+      t: 'Va abolito lo sconto fiscale per i gestori dei fondi di private equity (il «carried interest»).',
+      ctx: 'Permette di tassare i loro compensi come guadagni di capitale, al 20% invece che fino al 37%. Trump ha promesso più volte di abolirlo, ma la legge di bilancio del 2025 l’ha lasciato intatto.',
+      p: [ 2,  2,  2,  1,  0, -1,  1, -1], liv: 'cbbcccbc',
+      fonte: 'Promesse di Trump (2016, 2024); proposte democratiche.' },
+    { id: 'irs',
+      t: 'L’agenzia delle entrate (IRS) deve avere più personale e più fondi per controllare i contribuenti più ricchi.',
+      ctx: 'Nel 2025 l’IRS ha perso circa un quarto dei dipendenti, tra tagli del DOGE e uscite volontarie.',
+      p: [ 2,  2,  2,  1, -1, -2, -2, -2], liv: 'bbbccbbc',
+      fonte: 'Fondi dell’Inflation Reduction Act (2022) voluti dai democratici e poi tagliati dai repubblicani.' },
+    { id: 'dazi_fisco',
+      t: 'I dazi sulle importazioni sono un buon modo per finanziare lo Stato al posto delle tasse sul reddito.',
+      ctx: 'Trump ha proposto più volte di sostituire l’imposta sul reddito con i dazi. Gli economisti ricordano che i dazi li pagano in gran parte imprese e consumatori americani.',
+      p: [-2, -2, -2, -2, -1, -2,  2, -1], liv: 'ccccccbc',
+      fonte: 'Dichiarazioni di Trump (2024-25).' }
+  ]},
+  { id: 'lavoro', nome: 'Lavoro e welfare', aff: [
+    { id: 'salario', base: true,
+      t: 'Il salario minimo federale, fermo a 7,25 dollari l’ora dal 2009, va portato ad almeno 15 dollari.',
+      ctx: 'Bernie Sanders propone 17 dollari. Nel 2025 anche il repubblicano Josh Hawley ha presentato una proposta da 15 dollari. Molti Stati hanno già minimi più alti.',
+      p: [ 2,  2,  2,  1,  0, -1, -1, -2], liv: 'aacccccc',
+      fonte: 'Raise the Wage Act (Sanders, Senato) e cofirmatari; proposta di Hawley (2025).' },
+    { id: 'medicaid_lavoro', base: true,
+      t: 'Chi riceve Medicaid, l’assicurazione pubblica per i redditi bassi, deve dimostrare di lavorare, studiare o fare volontariato almeno 80 ore al mese.',
+      ctx: 'È l’obbligo introdotto dalla legge di bilancio del 2025, in vigore dal 2027. Il CBO stima che la legge lascerà senza assicurazione circa 10 milioni di persone in più entro il 2034.',
+      p: [-2, -2, -2, -1,  0,  2,  2,  2], liv: 'bbbbbbab',
+      fonte: 'Voti sulla legge di bilancio del 2025; Collins e Fitzpatrick contrari alla versione finale; stima CBO.' },
+    { id: 'pensione', base: true,
+      t: 'Per salvare la previdenza pubblica (Social Security) va alzata gradualmente l’età della pensione.',
+      ctx: 'Secondo i suoi amministratori, dal 2033 il fondo potrà pagare solo il 77% degli assegni. Trump ha promesso di non toccarla; Nikki Haley e Rand Paul hanno proposto di alzare l’età.',
+      p: [-2, -2, -2,  0, -1,  1, -2,  1], liv: 'bbbcccbc',
+      fonte: 'Rapporto dei Trustees (2025); promesse di Trump; proposte di Haley (2023) e Paul.' },
+    { id: 'pro_act', base: true,
+      t: 'Va approvato il PRO Act, che rende più facile formare un sindacato e limita le leggi «right to work».',
+      ctx: 'È passato alla Camera nel 2020 e nel 2021 ma si è fermato al Senato. Nel 2023 lo aveva firmato anche Lori Chavez-DeRemer, poi scelta da Trump come ministra del Lavoro.',
+      p: [ 2,  2,  2,  1,  0, -2, -1, -2], liv: 'aaabcccc',
+      fonte: 'Voti alla Camera (2020, 2021: sì di Fitzpatrick e pochi altri repubblicani).' },
+    { id: 'figli', base: true,
+      t: 'Il credito d’imposta per i figli va aumentato molto, anche per le famiglie che guadagnano troppo poco per pagare l’imposta sul reddito.',
+      ctx: 'Nel 2021 era stato portato per un anno a 3.600 dollari per figlio, pagati a tutti. Oggi vale 2.200 dollari, ma alle famiglie più povere ne arriva solo una parte o niente. JD Vance aveva proposto 5.000 dollari.',
+      p: [ 2,  2,  2,  2,  1,  0,  1, -1], liv: 'bbbccccc',
+      fonte: 'American Rescue Plan (2021); legge di bilancio del 2025; dichiarazioni di Vance (2024).' },
+    { id: 'sindacati_federali',
+      t: 'I dipendenti federali devono riavere il diritto alla contrattazione sindacale, tolto da Trump nel 2025.',
+      ctx: 'Nel marzo 2025 un ordine esecutivo ha escluso dalla contrattazione gran parte dei dipendenti federali. A dicembre la Camera ha approvato 231 a 195 una legge del democratico Jared Golden per annullarlo, con 20 voti repubblicani.',
+      p: [ 2,  2,  2,  2,  1, -2, -2, -2], liv: 'aaaaaaac',
+      fonte: 'Protect America’s Workforce Act (Camera, 11 dicembre 2025): promotori Golden e Fitzpatrick.' },
+    { id: 'studenti',
+      t: 'I debiti universitari degli studenti vanno cancellati in larga parte.',
+      ctx: 'Nel 2023 la Corte Suprema ha bocciato il piano di Biden da 400 miliardi. La legge di bilancio del 2025 ha chiuso i piani di rimborso più generosi.',
+      p: [ 2,  2,  1, -1, -2, -2, -2, -2], liv: 'bbbccccc',
+      fonte: 'Piano Biden (2022); posizioni di Sanders, Warren, Ocasio-Cortez.' },
+    { id: 'congedo',
+      t: 'Serve un congedo parentale retribuito garantito per legge a tutti i lavoratori.',
+      ctx: 'Gli Stati Uniti sono tra i pochissimi Paesi ricchi senza un congedo pagato nazionale: esiste solo in alcuni Stati.',
+      p: [ 2,  2,  2,  2,  1, -1,  0, -2], liv: 'bbbccccc',
+      fonte: 'FAMILY Act (democratici); proposta di Trump del 2016 per sei settimane di maternità.' },
+    { id: 'settimana32',
+      t: 'La settimana lavorativa va ridotta a 32 ore, senza tagli allo stipendio.',
+      ctx: 'È una proposta di legge presentata da Bernie Sanders nel 2024.',
+      p: [ 2,  1, -1, -2, -2, -2, -2, -2], liv: 'accccccc',
+      fonte: 'Thirty-Two Hour Workweek Act (Sanders, 2024).' },
+    { id: 'snap',
+      t: 'I tagli ai buoni alimentari (SNAP) decisi nel 2025 vanno annullati.',
+      ctx: 'La legge di bilancio del 2025 ha ridotto i fondi per circa 186 miliardi di dollari in dieci anni ed esteso l’obbligo di lavoro agli adulti fino a 64 anni.',
+      p: [ 2,  2,  2,  2,  1, -2, -2, -2], liv: 'bbbbcbbc',
+      fonte: 'Voti sulla legge di bilancio del 2025; stima CBO.' }
+  ]},
+  { id: 'immigrazione', nome: 'Immigrazione', aff: [
+    { id: 'regolarizzazione', base: true,
+      t: 'Gli immigrati irregolari che vivono e lavorano da anni negli Stati Uniti devono poter regolarizzarsi.',
+      ctx: 'Lo propone anche il Dignity Act della repubblicana María Elvira Salazar, scritto con i democratici: permesso legale in cambio di una multa e del pagamento delle tasse. Gli irregolari sono stimati in 11-14 milioni.',
+      p: [ 2,  2,  2,  2,  1,  0, -2, -2], liv: 'bbbbbccc',
+      fonte: 'Dignity Act (Salazar ed Escobar, 2025); programmi democratici; promesse di Trump.' },
+    { id: 'deportazioni', base: true,
+      t: 'Servono espulsioni di massa degli immigrati irregolari, anche di chi non ha commesso reati.',
+      ctx: 'È la promessa centrale di Trump. La legge di bilancio del 2025 ha stanziato circa 170 miliardi di dollari per controlli ed espulsioni, di cui 75 per l’ICE.',
+      p: [-2, -2, -2, -2, -1,  1,  2,  2], liv: 'bbbbcbab',
+      fonte: 'Legge di bilancio del 2025; dichiarazioni.' },
+    { id: 'abolire_ice', base: true,
+      t: 'L’ICE, l’agenzia che arresta ed espelle gli immigrati irregolari, va abolita.',
+      ctx: 'Nel gennaio 2026 a Minneapolis agenti federali hanno ucciso due cittadini americani, Renee Good e Alex Pretti. Ocasio-Cortez e il sindaco di New York Mamdani chiedono di abolire l’ICE; la leadership democratica chiede riforme.',
+      p: [ 2,  1, -1, -2, -2, -2, -2, -2], liv: 'bbbcccbc',
+      fonte: 'NPR (febbraio 2026): Ocasio-Cortez, Markey e Mamdani per l’abolizione; Warren per una «riorganizzazione totale».' },
+    { id: 'ice_maschere', base: true,
+      t: 'Gli agenti dell’immigrazione non devono agire a volto coperto e devono avere il mandato di un giudice per entrare nelle case.',
+      ctx: 'Sono due delle condizioni poste dai democratici nel 2026 per finanziare il Dipartimento della Sicurezza interna, insieme alle telecamere sulle divise. Lo stallo ha bloccato i fondi del dipartimento per settimane.',
+      p: [ 2,  2,  2,  2,  1, -1, -2,  0], liv: 'bbbccccc',
+      fonte: 'Richieste dei democratici al Senato nella trattativa sul bilancio della Sicurezza interna (febbraio 2026).' },
+    { id: 'ius_soli', base: true,
+      t: 'Nascere negli Stati Uniti non deve bastare per diventarne cittadini: i figli di immigrati irregolari non dovrebbero esserlo.',
+      ctx: 'Trump lo ha stabilito con un ordine esecutivo nel 2025, ma il 30 giugno 2026 la Corte Suprema lo ha dichiarato incostituzionale: la cittadinanza per nascita è garantita dal 14° emendamento.',
+      p: [-2, -2, -2, -2, -1,  0,  2,  2], liv: 'bbbbcbab',
+      fonte: 'Ordine esecutivo 14160 (gennaio 2025); Trump v. Barbara (Corte Suprema, 30 giugno 2026).' },
+    { id: 'laken_riley',
+      t: 'Gli immigrati irregolari accusati di furto o di reati violenti vanno tenuti in detenzione fino all’espulsione.',
+      ctx: 'È il Laken Riley Act, prima legge firmata da Trump nel 2025: alla Camera hanno votato sì anche 46 democratici, al Senato 12, tra cui John Fetterman.',
+      p: [-2, -2, -1,  2,  2,  2,  2,  2], liv: 'aaaaaaaa',
+      fonte: 'Voti finali sul Laken Riley Act (gennaio 2025).' },
+    { id: 'h1b',
+      t: 'Il programma di visti H-1B per lavoratori stranieri qualificati va ridotto drasticamente.',
+      ctx: 'Nel settembre 2025 Trump ha imposto una tassa di 100.000 dollari sulle nuove domande, ma poi ha difeso il programma. A destra Marjorie Taylor Greene vuole abolirlo; a sinistra Bernie Sanders lo accusa di abbassare i salari.',
+      p: [ 1, -1, -1, -1, -1, -1,  0,  2], liv: 'bcccccbb',
+      fonte: 'Proclamazione presidenziale (settembre 2025); dichiarazioni di Trump, Greene e Sanders.' },
+    { id: 'rifugiati',
+      t: 'Gli Stati Uniti devono tornare ad accogliere molti più rifugiati.',
+      ctx: 'Per il 2026 Trump ha fissato il tetto a 7.500 ingressi, il più basso della storia, riservati soprattutto ai sudafricani bianchi (afrikaner). Con Biden era 125.000.',
+      p: [ 2,  2,  2,  1,  0, -1, -2, -2], liv: 'bbbcccac',
+      fonte: 'Tetto per l’anno fiscale 2026 (ottobre 2025).' },
+    { id: 'muro',
+      t: 'Il muro al confine con il Messico va completato.',
+      ctx: 'La legge di bilancio del 2025 ha stanziato circa 46 miliardi di dollari per il muro. Gli ingressi irregolari al confine sono ai minimi da decenni.',
+      p: [-2, -2, -1,  0,  1,  2,  2,  2], liv: 'bbbcbbab',
+      fonte: 'Legge di bilancio del 2025.' },
+    { id: 'santuari',
+      t: 'Le città e gli Stati che non collaborano con l’ICE («santuari») devono perdere i fondi federali.',
+      ctx: 'L’amministrazione Trump ha cercato di tagliare i fondi a città come New York, Chicago e Los Angeles; i tribunali hanno bloccato più volte questi tagli.',
+      p: [-2, -2, -2, -1,  0,  1,  2,  2], liv: 'bbbcccac',
+      fonte: 'Ordini esecutivi del 2025 e relativi ricorsi.' }
+  ]},
+  { id: 'sanita', nome: 'Sanità e vaccini', aff: [
+    { id: 'm4a', base: true,
+      t: 'Serve un sistema sanitario pubblico unico, «Medicare for All», che sostituisca le assicurazioni private.',
+      ctx: 'È la proposta di Bernie Sanders e Pramila Jayapal. Oggi la sanità americana si regge sulle assicurazioni private, spesso legate al lavoro; oltre 25 milioni di persone non hanno alcuna copertura.',
+      p: [ 2,  2,  0, -2, -2, -2, -2, -2], liv: 'aabccccc',
+      fonte: 'Medicare for All Act (2025) e cofirmatari.' },
+    { id: 'aca', base: true,
+      t: 'I sussidi rafforzati per pagare l’assicurazione dell’Obamacare, scaduti a fine 2025, vanno prorogati.',
+      ctx: 'Per questi sussidi i democratici hanno bloccato il bilancio federale per 43 giorni nell’autunno 2025, lo «shutdown» più lungo della storia. L’8 gennaio 2026 la Camera ha approvato una proroga di tre anni con 17 voti repubblicani.',
+      p: [ 2,  2,  2,  2,  2, -1, -1, -1], liv: 'aaaaacbc',
+      fonte: 'Voto alla Camera dell’8 gennaio 2026 (230-196): sì di Fitzpatrick, Lawler e altri 15 repubblicani; Greene a favore della proroga nell’ottobre 2025.' },
+    { id: 'medicaid_tagli', base: true,
+      t: 'I tagli a Medicaid della legge di bilancio del 2025, circa 1.000 miliardi di dollari in dieci anni, vanno annullati.',
+      ctx: 'Medicaid copre oltre 70 milioni di persone a basso reddito. Il repubblicano Josh Hawley ha votato i tagli e subito dopo ha presentato una legge per annullarne una parte.',
+      p: [ 2,  2,  2,  2,  1, -2, -2, -2], liv: 'bbbbbbbb',
+      fonte: 'Voti sulla legge di bilancio del 2025 (Collins contraria per Medicaid); proposta di Hawley (luglio 2025).' },
+    { id: 'farmaci', base: true,
+      t: 'Il governo deve fissare i prezzi dei farmaci allineandoli a quelli pagati negli altri Paesi ricchi.',
+      ctx: 'È il principio della «nazione più favorita» che Trump ha applicato nel 2025 con accordi con case farmaceutiche come Pfizer. Lo chiedono da anni anche Sanders e molti democratici.',
+      p: [ 2,  2,  1,  1,  1, -1,  2, -1], liv: 'bcccccac',
+      fonte: 'Ordine esecutivo di Trump (maggio 2025) e accordo con Pfizer (settembre 2025); proposte di Sanders.' },
+    { id: 'vaccini_cdc', base: true,
+      t: 'Il governo ha fatto bene a ridurre i vaccini raccomandati a tutti i bambini, come voluto da Robert F. Kennedy Jr.',
+      ctx: 'Il 5 gennaio 2026 i CDC hanno ridotto da 17 a 11 le malattie coperte dalle vaccinazioni raccomandate a tutti; per influenza, epatite A e rotavirus serve ora un consulto col medico. Il senatore repubblicano Bill Cassidy, medico, ha criticato la scelta.',
+      p: [-2, -2, -2, -2, -2, -2,  1,  2], liv: 'ccbccbab',
+      fonte: 'Direttiva di Trump (5 dicembre 2025) e decisione dei CDC (5 gennaio 2026); critiche di Cassidy e dei democratici.' },
+    { id: 'vaccini_scuola',
+      t: 'Gli Stati non devono più rendere obbligatorie le vaccinazioni per andare a scuola.',
+      ctx: 'Nel settembre 2025 la Florida ha annunciato di voler eliminare tutti gli obblighi vaccinali scolastici, primo Stato a farlo.',
+      p: [-2, -2, -2, -2, -2, -1,  0,  2], liv: 'cccccccb',
+      fonte: 'Annuncio del governo della Florida (settembre 2025).' },
+    { id: 'hsa',
+      t: 'I sussidi sanitari vanno versati direttamente alle persone, su conti di risparmio sanitario, invece che alle assicurazioni.',
+      ctx: 'È l’alternativa ai sussidi dell’Obamacare proposta da Trump e da molti repubblicani.',
+      p: [-2, -2, -2, -1,  0,  2,  2,  2], liv: 'cccccbbb',
+      fonte: 'Dichiarazioni di Trump e proposte repubblicane (fine 2025).' },
+    { id: 'planned_parenthood',
+      t: 'Planned Parenthood, la principale rete di cliniche per la salute riproduttiva, non deve ricevere fondi pubblici.',
+      ctx: 'La legge di bilancio del 2025 le ha tolto per un anno i rimborsi di Medicaid. Gli aborti erano già esclusi dai fondi federali.',
+      p: [-2, -2, -2, -2, -1,  2,  2,  2], liv: 'bbbbbbab',
+      fonte: 'Legge di bilancio del 2025; Collins e Murkowski contrarie al taglio.' },
+    { id: 'fluoro',
+      t: 'Il fluoro va tolto dall’acqua potabile, come hanno deciso Utah e Florida nel 2025.',
+      ctx: 'Robert F. Kennedy Jr. sostiene che sia dannoso; le principali associazioni mediche e dentistiche lo considerano sicuro e utile contro la carie.',
+      p: [-2, -2, -2, -2, -2, -1,  1,  2], liv: 'ccccccbc',
+      fonte: 'Leggi di Utah e Florida (2025); dichiarazioni di Kennedy.' },
+    { id: 'privata',
+      t: 'La sanità deve restare basata sulle assicurazioni private, con lo Stato che aiuta solo chi non può permettersele.',
+      ctx: 'È il modello attuale: assicurazioni private per la maggior parte delle persone, Medicare per gli anziani e Medicaid per i redditi bassi.',
+      p: [-2, -1,  0,  1,  2,  2,  2,  2], liv: 'cccccccc',
+      fonte: 'Stima.' }
+  ]},
+  { id: 'esteri', nome: 'Politica estera e difesa', aff: [
+    { id: 'iran_attacco', base: true,
+      t: 'Era giusto attaccare l’Iran insieme a Israele, come hanno fatto gli Stati Uniti dal 28 febbraio 2026.',
+      ctx: 'Nei raid è stato ucciso la Guida suprema Ali Khamenei; l’Iran ha risposto chiudendo lo Stretto di Hormuz. La tregua firmata a giugno è saltata a luglio. I militari americani morti sono una ventina.',
+      p: [-2, -2, -2,  0, -1,  2,  2, -2], liv: 'bbbbbbab',
+      fonte: 'Ordine di Trump; sostegno di Fetterman, Pence e Haley; contrari Greene, Massie, Paul e Mamdani; voti sui poteri di guerra.' },
+    { id: 'iran_congresso', base: true,
+      t: 'Il presidente non deve poter continuare la guerra con l’Iran senza un voto del Congresso.',
+      ctx: 'Al Senato quasi tutti i tentativi di fermarla sono falliti: solo il 19 maggio una risoluzione ha superato un voto procedurale, con quattro repubblicani. Alla Camera una è passata il 3 giugno 2026, 215 a 208, con quattro repubblicani tra cui Thomas Massie e Brian Fitzpatrick. Trump può comunque porre il veto.',
+      p: [ 2,  2,  2,  1,  2, -2, -2,  2], liv: 'aaabaaaa',
+      fonte: 'Senato: 4 marzo 2026 (47-53, sì di Paul, no di Fetterman); 19 maggio 2026 (voto procedurale passato 50-47, sì di Collins, Murkowski, Paul e Cassidy); 16 giugno 2026 (47-48, no di Fetterman). Camera: 3 giugno 2026 (215-208, sì di Massie, Fitzpatrick, Davidson e Barrett).' },
+    { id: 'ucraina', base: true,
+      t: 'Gli Stati Uniti devono tornare a finanziare gli aiuti militari all’Ucraina, invece di limitarsi a vendere armi agli europei che le girano a Kyiv.',
+      ctx: 'Dal 2025 Trump non ha chiesto al Congresso nuovi aiuti: le armi americane arrivano soprattutto tramite acquisti dei Paesi NATO. La guerra con la Russia è ancora in corso.',
+      p: [ 1,  1,  2,  2,  2,  2, -1, -2], liv: 'bbbbbbbb',
+      fonte: 'Voti sugli aiuti dell’aprile 2024 (indicazione indiretta); dichiarazioni di Vance, Johnson, McConnell, Pence, Haley.' },
+    { id: 'israele_armi', base: true,
+      t: 'Gli Stati Uniti devono bloccare la vendita di bombe e altre armi offensive a Israele.',
+      ctx: 'Il 15 aprile 2026 la maggioranza dei senatori democratici, 40 in un voto e 36 nell’altro, ha appoggiato due risoluzioni di Bernie Sanders per bloccare alcune vendite. I repubblicani hanno votato tutti contro.',
+      p: [ 2,  2,  1, -1, -2, -2, -2,  1], liv: 'aaaaaaab',
+      fonte: 'Senato 15 aprile 2026: no di Schumer, Fetterman e altri democratici; nessun repubblicano a favore. Greene e Massie per tagliare i fondi militari a Israele (luglio 2025).' },
+    { id: 'nato', base: true,
+      t: 'Gli Stati Uniti devono restare pienamente impegnati nella NATO e nella difesa dell’Europa.',
+      ctx: 'Trump ha ottenuto dagli alleati l’impegno a spendere il 5% del PIL per la difesa entro il 2035. Nel dicembre 2025 il repubblicano Thomas Massie ha presentato una legge per uscire dall’Alleanza.',
+      p: [ 0,  1,  2,  2,  2,  2,  0, -2], liv: 'cbbbbbbb',
+      fonte: 'Vertice NATO dell’Aia (giugno 2025); proposta di legge di Massie (dicembre 2025).' },
+    { id: 'groenlandia',
+      t: 'Gli Stati Uniti devono ottenere il controllo della Groenlandia, anche facendo pressione sulla Danimarca.',
+      ctx: 'Nel gennaio 2026 Trump ha minacciato dazi contro i Paesi europei contrari, poi a Davos ha annunciato un «quadro per un accordo futuro» con la NATO e ha ritirato le minacce.',
+      p: [-2, -2, -2, -1, -2, -1,  2, -1], liv: 'cbbccbac',
+      fonte: 'Dichiarazioni di Trump e Vance; critiche democratiche e di alcuni repubblicani.' },
+    { id: 'maduro',
+      t: 'Era giusto catturare con un’operazione militare il presidente venezuelano Nicolás Maduro, come è avvenuto il 3 gennaio 2026.',
+      ctx: 'L’operazione è stata decisa senza autorizzazione del Congresso. Una risoluzione per limitare i poteri di guerra sul Venezuela è stata bloccata al Senato con il voto decisivo del vicepresidente Vance.',
+      p: [-2, -2, -1,  0,  0,  2,  2, -1], liv: 'bbbcbbab',
+      fonte: 'Senato, gennaio 2026: sì iniziale di Collins, Murkowski, Paul, Hawley e Young; Hawley e Young poi contrari; voto decisivo di Vance.' },
+    { id: 'difesa',
+      t: 'Il bilancio della Difesa va portato a 1.500 miliardi di dollari, come chiede Trump per il 2027.',
+      ctx: 'Sarebbe un aumento di oltre il 40% in un anno, il più forte dalla Seconda guerra mondiale, in parte compensato da tagli del 10% alle altre spese.',
+      p: [-2, -2, -2, -1,  0,  2,  2, -2], liv: 'cbbccbac',
+      fonte: 'Richiesta di bilancio 2027 (aprile 2026); critiche di Patty Murray; sostegno dei presidenti repubblicani delle commissioni Difesa.' },
+    { id: 'usaid',
+      t: 'La chiusura dell’agenzia per gli aiuti allo sviluppo (USAID) e i tagli agli aiuti all’estero sono stati giusti.',
+      ctx: 'Nel 2025 l’amministrazione Trump ha chiuso l’USAID e il Congresso ha cancellato circa 9 miliardi di dollari tra aiuti esteri e fondi per radio e tv pubbliche. Al Senato votarono contro anche Collins e Murkowski.',
+      p: [-2, -2, -2, -2, -1,  0,  2,  2], liv: 'aaaabcab',
+      fonte: 'Pacchetto di tagli approvato nel luglio 2025.' },
+    { id: 'taiwan',
+      t: 'Gli Stati Uniti devono difendere militarmente Taiwan se viene attaccata dalla Cina.',
+      ctx: 'Da decenni Washington mantiene una «ambiguità strategica»: aiuta Taiwan ad armarsi senza promettere esplicitamente di difenderla.',
+      p: [-1,  0,  1,  2,  2,  2,  0, -1], liv: 'cccccbcc',
+      fonte: 'Stima.' }
+  ]},
+  { id: 'ambiente', nome: 'Ambiente ed energia', aff: [
+    { id: 'gnd', base: true,
+      t: 'Serve un grande piano pubblico contro il cambiamento climatico, come il Green New Deal.',
+      ctx: 'Proposto nel 2019 da Alexandria Ocasio-Cortez ed Ed Markey: investimenti pubblici per azzerare le emissioni e creare lavoro.',
+      p: [ 2,  2,  1, -1, -2, -2, -2, -2], liv: 'abcccccc',
+      fonte: 'Risoluzione sul Green New Deal e cofirmatari.' },
+    { id: 'endangerment', base: true,
+      t: 'Ha fatto bene l’agenzia per l’ambiente (EPA) a cancellare nel 2026 la base giuridica che le permetteva di limitare i gas serra.',
+      ctx: 'Nel febbraio 2026 l’EPA ha revocato la «endangerment finding» del 2009, che riconosceva i gas serra come pericolosi per la salute, e ha abolito i limiti alle emissioni delle auto.',
+      p: [-2, -2, -2, -2, -1,  1,  2,  2], liv: 'bbbcccab',
+      fonte: 'Decisione dell’EPA (febbraio 2026).' },
+    { id: 'trivelle', base: true,
+      t: 'Bisogna aumentare le trivellazioni di petrolio e gas, anche in Alaska e in mare.',
+      ctx: '«Drill, baby, drill» è lo slogan di Trump. Gli Stati Uniti sono già il primo produttore di petrolio al mondo.',
+      p: [-2, -2, -1,  1,  1,  2,  2,  2], liv: 'bbbbbbab',
+      fonte: 'Ordini esecutivi del 2025; posizioni di Murkowski, Fetterman e Shapiro.' },
+    { id: 'incentivi_verdi', base: true,
+      t: 'Gli incentivi per auto elettriche, pannelli solari ed eolico, eliminati nel 2025, vanno ripristinati.',
+      ctx: 'Il credito d’imposta di 7.500 dollari per le auto elettriche è finito il 30 settembre 2025; quelli per solare ed eolico chiudono in anticipo. Lo ha deciso la legge di bilancio del 2025.',
+      p: [ 2,  2,  2,  2,  0, -1, -2, -2], liv: 'bbbbbcab',
+      fonte: 'Legge di bilancio del 2025.' },
+    { id: 'nucleare', base: true,
+      t: 'Servono grandi investimenti pubblici per costruire nuove centrali nucleari.',
+      ctx: 'Nel 2025 Trump ha firmato ordini esecutivi per quadruplicare l’energia nucleare entro il 2050. Il sostegno al nucleare è cresciuto anche tra i democratici.',
+      p: [-1,  0,  1,  2,  2,  2,  2,  0], liv: 'bcccccac',
+      fonte: 'Ordini esecutivi (maggio 2025); storica contrarietà di Sanders.' },
+    { id: 'parigi',
+      t: 'Gli Stati Uniti devono rientrare nell’Accordo di Parigi sul clima.',
+      ctx: 'Trump ne ha annunciato l’uscita il primo giorno del secondo mandato; è diventata effettiva nel gennaio 2026.',
+      p: [ 2,  2,  2,  2,  1, -1, -2, -2], liv: 'bbbbcbab',
+      fonte: 'Ordine esecutivo del 20 gennaio 2025.' },
+    { id: 'eolico_mare',
+      t: 'Il governo ha fatto bene a fermare i parchi eolici in mare lungo la costa atlantica.',
+      ctx: 'Nel 2025 l’amministrazione ha bloccato diversi progetti già autorizzati, citando anche la sicurezza nazionale. Trump sostiene che l’eolico rovini il paesaggio e uccida gli uccelli.',
+      p: [-2, -2, -2, -2, -1,  0,  2,  1], liv: 'ccbcccac',
+      fonte: 'Decisioni del Dipartimento dell’Interno (2025).' },
+    { id: 'fracking',
+      t: 'Il fracking per estrarre gas e petrolio va vietato.',
+      ctx: 'Sanders lo chiede da anni. Kamala Harris lo sosteneva nel 2019, ma nel 2024 ha cambiato posizione; in Pennsylvania, Stato chiave, lo difendono anche i democratici Fetterman e Shapiro.',
+      p: [ 2,  1, -1, -2, -2, -2, -2, -2], liv: 'bbbbcccc',
+      fonte: 'Dichiarazioni di Sanders, Harris, Fetterman e Shapiro.' },
+    { id: 'permessi',
+      t: 'Le regole ambientali vanno semplificate per costruire più in fretta case, reti elettriche e impianti.',
+      ctx: 'È l’idea dell’«abundance», diffusa anche tra i democratici: nel 2025 Gavin Newsom ha firmato una riforma che esenta molte nuove case dalla legge ambientale californiana.',
+      p: [-1,  0,  1,  2,  2,  2,  2,  1], liv: 'ccbccccc',
+      fonte: 'Riforma della legge ambientale californiana (giugno 2025).' },
+    { id: 'data_center',
+      t: 'Va sospesa la costruzione di nuovi grandi data center per l’intelligenza artificiale, finché non se ne capisce l’impatto su bollette, lavoro e ambiente.',
+      ctx: 'Lo ha proposto Bernie Sanders nel dicembre 2025. I data center consumano sempre più elettricità e sono contestati in molte comunità locali.',
+      p: [ 2,  0, -1, -1, -1, -1, -2,  0], liv: 'bccccccc',
+      fonte: 'Proposta di Sanders (16 dicembre 2025).' }
+  ]},
+  { id: 'diritti', nome: 'Diritti civili e società', aff: [
+    { id: 'aborto_legge', base: true,
+      t: 'Il diritto all’aborto va garantito in tutto il Paese con una legge federale.',
+      ctx: 'Nel 2022 la Corte Suprema ha annullato la sentenza Roe v. Wade: oggi decidono i singoli Stati, e una dozzina vieta l’aborto quasi del tutto.',
+      p: [ 2,  2,  2,  1,  0, -2, -2, -2], liv: 'aaaabbbc',
+      fonte: 'Women’s Health Protection Act (democratici); proposta più limitata di Collins e Murkowski.' },
+    { id: 'aborto_15', base: true,
+      t: 'L’aborto va vietato in tutto il Paese dopo la quindicesima settimana.',
+      ctx: 'Lo proponeva nel 2022 il senatore repubblicano Lindsey Graham. Trump sostiene invece che la scelta spetti ai singoli Stati.',
+      p: [-2, -2, -2, -2, -1,  2, -1,  1], liv: 'bbbccbbc',
+      fonte: 'Proposta Graham (2022); dichiarazioni di Trump (2024) e Pence.' },
+    { id: 'atlete_trans', base: true,
+      t: 'Le atlete transgender non devono poter gareggiare nelle competizioni sportive femminili.',
+      ctx: 'Nel gennaio 2025 la Camera ha approvato un divieto nazionale con due voti democratici; al Senato i democratici l’hanno bloccato. Il governatore democratico Gavin Newsom ha definito «profondamente ingiusta» la loro partecipazione.',
+      p: [-2, -2, -1,  0,  2,  2,  2,  2], liv: 'aaabaaaa',
+      fonte: 'Camera, 14 gennaio 2025 (218-206; sì di Cuellar e Vicente Gonzalez); Senato, 3 marzo 2025; dichiarazioni di Newsom (marzo 2025).' },
+    { id: 'cannabis', base: true,
+      t: 'La cannabis va legalizzata a livello federale.',
+      ctx: 'È già legale per uso ricreativo in 24 Stati. Nel dicembre 2025 Trump ha ordinato di riclassificarla come sostanza a rischio moderato, senza legalizzarla.',
+      p: [ 2,  2,  2,  1,  0, -2,  0,  1], liv: 'bbbcccac',
+      fonte: 'Ordine esecutivo del 18 dicembre 2025; proposta di legge di Schumer; contrarietà di Johnson.' },
+    { id: 'dei', base: true,
+      t: 'I programmi di diversità, equità e inclusione (DEI) vanno eliminati da governo, università e aziende.',
+      ctx: 'Trump li ha aboliti nell’amministrazione federale nel gennaio 2025 e ha fatto pressione su università e imprese perché li chiudessero.',
+      p: [-2, -2, -2, -1,  1,  2,  2,  2], liv: 'bbbcccab',
+      fonte: 'Ordini esecutivi del gennaio 2025.' },
+    { id: 'cure_trans',
+      t: 'Le cure per la transizione di genere ai minori, come i bloccanti della pubertà, vanno vietate e punite come reato in tutto il Paese.',
+      ctx: 'Il 17 dicembre 2025 la Camera ha approvato 216 a 211 una legge di Marjorie Taylor Greene che prevede fino a dieci anni di carcere per i medici: tre democratici a favore, quattro repubblicani contro.',
+      p: [-2, -2, -2, -1,  0,  1,  2,  2], liv: 'aaabbcaa',
+      fonte: 'Protect Children’s Innocence Act (Camera, 17 dicembre 2025).' },
+    { id: 'mifepristone',
+      t: 'La pillola abortiva (mifepristone) va vietata o fortemente limitata in tutto il Paese.',
+      ctx: 'È usata in circa due aborti su tre negli Stati Uniti. Nel 2025 l’agenzia del farmaco (FDA) ha avviato una nuova revisione della sua sicurezza.',
+      p: [-2, -2, -2, -2, -2,  2,  0,  1], liv: 'bbbcbbcc',
+      fonte: 'Dichiarazioni di Hawley e Pence; revisione della FDA.' },
+    { id: 'obergefell',
+      t: 'La Corte Suprema dovrebbe rivedere la sentenza del 2015 che ha legalizzato il matrimonio tra persone dello stesso sesso.',
+      ctx: 'Nel novembre 2025 la Corte ha rifiutato di riesaminare la sentenza Obergefell. Il Respect for Marriage Act del 2022 obbliga comunque gli Stati a riconoscere i matrimoni celebrati altrove.',
+      p: [-2, -2, -2, -2, -2,  0,  0,  1], liv: 'bbbbbbcb',
+      fonte: 'Voti sul Respect for Marriage Act (2022): sì di Collins e Murkowski, no di McConnell e Paul.' },
+    { id: 'comandamenti',
+      t: 'Nelle aule delle scuole pubbliche devono poter essere esposti i Dieci comandamenti.',
+      ctx: 'Lo impongono nuove leggi di Texas e Louisiana, bloccate in parte dai tribunali federali per violazione della separazione tra Stato e Chiesa.',
+      p: [-2, -2, -2, -2, -1,  2,  2,  1], liv: 'cccccccc',
+      fonte: 'Stima.' },
+    { id: 'voucher',
+      t: 'I fondi pubblici devono poter pagare la scuola privata o religiosa tramite buoni scuola (voucher).',
+      ctx: 'La legge di bilancio del 2025 ha creato un credito d’imposta federale per chi finanzia borse di studio per le scuole private. Tra i democratici, il governatore della Pennsylvania Josh Shapiro si è detto favorevole.',
+      p: [-2, -2, -2, -1,  1,  2,  2,  2], liv: 'bbbccbab',
+      fonte: 'Legge di bilancio del 2025; dichiarazioni di Shapiro (2023).' }
+  ]},
+  { id: 'armi', nome: 'Armi, polizia e giustizia', aff: [
+    { id: 'controlli', base: true,
+      t: 'Chi compra un’arma, anche da un privato o a una fiera, deve sempre essere sottoposto a un controllo dei precedenti.',
+      ctx: 'Oggi il controllo è obbligatorio solo nei negozi autorizzati. La Camera lo ha esteso nel 2021 con otto voti repubblicani, ma la legge si è fermata al Senato.',
+      p: [ 2,  2,  2,  2,  2, -1, -1, -2], liv: 'aaaaaccb',
+      fonte: 'Bipartisan Background Checks Act (Camera, marzo 2021, 227-203).' },
+    { id: 'fucili_assalto', base: true,
+      t: 'La vendita di fucili d’assalto come l’AR-15 va vietata.',
+      ctx: 'Un divieto è stato in vigore dal 1994 al 2004. La Camera ne ha approvato uno nuovo nel 2022, 217 a 213, con due repubblicani a favore; il democratico Jared Golden, allora contrario, ha cambiato idea dopo la strage di Lewiston del 2023.',
+      p: [ 2,  2,  2,  1,  0, -2, -2, -2], liv: 'aaaabbbb',
+      fonte: 'Voto alla Camera del 29 luglio 2022 (sì di Fitzpatrick); dichiarazioni di Golden (ottobre 2023).' },
+    { id: 'guardia_nazionale', base: true,
+      t: 'È giusto mandare la Guardia nazionale nelle città per contrastare criminalità e proteste, anche contro il parere dei governatori.',
+      ctx: 'Nel 2025 Trump l’ha inviata a Los Angeles, Washington e Memphis e ha tentato a Portland e Chicago. Il 23 dicembre la Corte Suprema ha bloccato il dispiegamento in Illinois.',
+      p: [-2, -2, -2, -1, -1,  0,  2,  1], liv: 'bbbbcbab',
+      fonte: 'Ordini di dispiegamento (2025); causa della California; Trump v. Illinois (23 dicembre 2025).' },
+    { id: 'polizia', base: true,
+      t: 'Le polizie locali hanno bisogno di più fondi e più agenti.',
+      ctx: 'Dopo le proteste del 2020 lo slogan «defund the police» ha diviso i democratici; oggi la gran parte del partito chiede più fondi.',
+      p: [-1,  0,  2,  2,  2,  2,  2,  1], liv: 'cccbcccc',
+      fonte: 'Stima.' },
+    { id: 'pena_morte', base: true,
+      t: 'La pena di morte va abolita.',
+      ctx: 'Trump ha rilanciato le esecuzioni federali nel 2025. Tra i democratici, i governatori Gavin Newsom e Josh Shapiro hanno sospeso le esecuzioni nei loro Stati.',
+      p: [ 2,  2,  1,  1, -1, -2, -2, -2], liv: 'bbbbcbac',
+      fonte: 'Ordine esecutivo del 20 gennaio 2025; moratoria di Newsom (2019); impegno di Shapiro (2023).' },
+    { id: 'porto_nascosto',
+      t: 'Il porto d’armi nascosto rilasciato da uno Stato deve valere in tutti gli altri.',
+      ctx: 'È il Concealed Carry Reciprocity Act, in discussione alla Camera dal 2025. Oggi ogni Stato decide quali permessi riconoscere.',
+      p: [-2, -2, -2, -1,  0,  2,  2,  2], liv: 'ccccccbb',
+      fonte: 'Proposta di legge H.R. 38 (2025).' },
+    { id: 'cauzione',
+      t: 'La cauzione in denaro per uscire dal carcere in attesa di processo va abolita.',
+      ctx: 'L’Illinois l’ha abolita nel 2023. Nell’agosto 2025 Trump ha firmato un ordine contro le città che la eliminano.',
+      p: [ 2,  1,  0, -1, -2, -2, -2, -2], liv: 'ccccccac',
+      fonte: 'Ordine esecutivo dell’agosto 2025.' },
+    { id: 'immunita',
+      t: 'Gli agenti di polizia non devono più essere protetti dalle cause civili per abusi («qualified immunity»).',
+      ctx: 'L’immunità, creata dalla giurisprudenza, rende molto difficile fare causa ai singoli agenti. La sua abolizione era nel George Floyd Justice in Policing Act.',
+      p: [ 2,  2,  1,  0, -1, -2, -2,  0], liv: 'bbbccccc',
+      fonte: 'George Floyd Justice in Policing Act (Camera, 2021).' },
+    { id: 'fentanyl',
+      t: 'Per i reati legati al fentanyl servono pene minime obbligatorie più severe.',
+      ctx: 'L’HALT Fentanyl Act, firmato nel luglio 2025, prevede fino a 10 anni di pena minima: alla Camera l’hanno votato anche 98 democratici.',
+      p: [-2, -1,  0,  2,  2,  2,  2,  1], liv: 'aaaaaaab',
+      fonte: 'HALT Fentanyl Act (Camera, febbraio 2025, 312-108).' },
+    { id: 'eta21',
+      t: 'L’età minima per comprare un fucile semiautomatico va alzata da 18 a 21 anni.',
+      ctx: 'Diverse stragi nelle scuole, come quella di Uvalde nel 2022, sono state commesse da diciottenni con fucili comprati legalmente.',
+      p: [ 2,  2,  2,  2,  1, -1, -1, -2], liv: 'cbbccccc',
+      fonte: 'Stima.' }
+  ]},
+  { id: 'economia', nome: 'Economia, commercio e tecnologia', aff: [
+    { id: 'dazi', base: true,
+      t: 'I dazi di Trump vanno mantenuti, anche dopo che la Corte Suprema ha bocciato quelli imposti con i poteri d’emergenza.',
+      ctx: 'Il 20 febbraio 2026 la Corte, 6 a 3, ha stabilito che la legge sulle emergenze economiche (IEEPA) non permette di imporre dazi. Trump ha reagito con nuovi dazi globali temporanei basati su un’altra legge e con nuove indagini per dazi mirati.',
+      p: [-1, -1, -2, -1, -2, -1,  2, -1], liv: 'bbbbaaaa',
+      fonte: 'Learning Resources v. Trump (20 febbraio 2026); voti del Senato contro i dazi (ottobre 2025).' },
+    { id: 'dazi_congresso', base: true,
+      t: 'Deve essere il Congresso, non il presidente, a decidere i dazi.',
+      ctx: 'Nell’ottobre 2025 il Senato ha votato contro i dazi globali con quattro repubblicani: McConnell, Paul, Collins e Murkowski. L’11 febbraio 2026 la Camera ha votato contro quelli sul Canada con sei repubblicani.',
+      p: [ 1,  1,  2,  2,  2,  1, -2,  2], liv: 'bbaaaaaa',
+      fonte: 'Senato, 30 ottobre 2025 (51-47); Camera, 11 febbraio 2026 (219-211).' },
+    { id: 'fed', base: true,
+      t: 'Il presidente deve poter licenziare i membri della Federal Reserve che non condividono la sua politica sui tassi.',
+      ctx: 'Nel 2025 Trump ha cercato di rimuovere la governatrice Lisa Cook: il 29 giugno 2026 la Corte Suprema, 5 a 4, l’ha lasciata al suo posto. A maggio Kevin Warsh, scelto da Trump, ha preso il posto di Jerome Powell alla guida della Fed.',
+      p: [-2, -2, -2, -2, -2, -2,  2,  0], liv: 'bbbbcbac',
+      fonte: 'Trump v. Cook (29 giugno 2026); critiche di Tillis all’indagine su Powell.' },
+    { id: 'carte_credito', base: true,
+      t: 'Gli interessi sulle carte di credito vanno limitati per legge al 10%.',
+      ctx: 'Lo chiedono insieme Bernie Sanders e il repubblicano Josh Hawley con una proposta di legge del 2025; nel gennaio 2026 lo ha chiesto anche Trump. Oggi i tassi superano in media il 20%.',
+      p: [ 2,  2,  1,  0, -1, -2,  1,  0], liv: 'acccccbc',
+      fonte: 'Proposta Sanders-Hawley (febbraio 2025); Ocasio-Cortez alla Camera; appello di Trump (gennaio 2026).' },
+    { id: 'case_fondi', base: true,
+      t: 'Ai grandi fondi d’investimento va vietato di comprare case unifamiliari.',
+      ctx: 'Nel gennaio 2026 Trump ha firmato un ordine esecutivo in questo senso e ha chiesto al Congresso una legge. Proposte simili circolano da anni tra i democratici.',
+      p: [ 2,  2,  2,  1,  0, -1,  2,  0], liv: 'bbbcccac',
+      fonte: 'Ordine esecutivo del gennaio 2026; proposte democratiche.' },
+    { id: 'intel',
+      t: 'È giusto che lo Stato entri nel capitale di aziende strategiche, come ha fatto nel 2025 prendendo il 10% di Intel.',
+      ctx: 'Bernie Sanders ha approvato l’operazione chiedendo un ritorno per i contribuenti; il repubblicano Rand Paul l’ha definita un passo verso il socialismo.',
+      p: [ 1,  0, -1, -1, -1, -2,  2, -2], liv: 'bcccccab',
+      fonte: 'Accordo con Intel (agosto 2025); dichiarazioni di Sanders, Paul e Tillis.' },
+    { id: 'chip_cina',
+      t: 'Va vietata la vendita alla Cina dei chip più avanzati per l’intelligenza artificiale, anche se penalizza aziende americane come Nvidia.',
+      ctx: 'Nel dicembre 2025 Trump ha autorizzato la vendita dei chip H200 di Nvidia alla Cina in cambio di una quota dei ricavi. Il leader democratico Chuck Schumer lo ha accusato di «svendere l’America».',
+      p: [ 1,  2,  2,  2,  2,  2, -2,  0], liv: 'ccbccbac',
+      fonte: 'Decisione di Trump (dicembre 2025); critiche di Schumer e di alcuni senatori repubblicani.' },
+    { id: 'ia_stati',
+      t: 'Gli Stati devono poter fare le proprie leggi sull’intelligenza artificiale, senza che Washington le blocchi.',
+      ctx: 'Nel luglio 2025 il Senato ha cancellato, 99 a 1, una moratoria di dieci anni sulle leggi statali. A dicembre Trump ha firmato un ordine per contestarle in tribunale; tra i repubblicani contrari ci sono Josh Hawley e il governatore della Florida Ron DeSantis.',
+      p: [ 2,  2,  2,  1,  1,  0, -1,  2], liv: 'bbbcccab',
+      fonte: 'Senato, 1° luglio 2025 (99-1); ordine esecutivo dell’11 dicembre 2025; dichiarazioni di Hawley, DeSantis e Greene.' },
+    { id: 'cripto',
+      t: 'Le criptovalute vanno regolate il meno possibile, per favorirne la crescita.',
+      ctx: 'Nel 2025 il Congresso ha approvato con voti di entrambi i partiti il GENIUS Act sulle stablecoin; Elizabeth Warren ha guidato l’opposizione. La famiglia Trump ha grandi interessi nel settore.',
+      p: [-2, -2, -1,  1,  1,  1,  2,  1], liv: 'bbbbbbbb',
+      fonte: 'GENIUS Act (Senato 68-30, Camera 308-122, luglio 2025).' },
+    { id: 'antitrust',
+      t: 'I colossi tecnologici come Google, Amazon e Meta vanno spezzati con le leggi antitrust.',
+      ctx: 'Nel 2024 un giudice ha stabilito che Google ha un monopolio illegale nella ricerca online. JD Vance ha elogiato in passato Lina Khan, la responsabile antitrust di Biden.',
+      p: [ 2,  2,  1,  0,  0, -1,  1,  0], liv: 'bbcccccc',
+      fonte: 'Proposte di Warren; dichiarazioni di Vance e Hawley.' }
+  ]},
+  { id: 'istituzioni', nome: 'Democrazia e poteri del presidente', aff: [
+    { id: 'save_act', base: true,
+      t: 'Per votare deve essere obbligatorio un documento d’identità con foto, e per registrarsi la prova della cittadinanza.',
+      ctx: 'È il SAVE America Act, approvato dalla Camera l’11 febbraio 2026, 218 a 213, con un solo voto democratico; al Senato è fermo. Secondo il Brennan Center, oltre 20 milioni di cittadini non hanno a portata di mano un documento che provi la cittadinanza.',
+      p: [-2, -2, -2,  0,  2,  2,  2,  2], liv: 'aaabaaaa',
+      fonte: 'Camera, 10 aprile 2025 (SAVE Act, 220-208, sì di quattro democratici tra cui Golden) e 11 febbraio 2026 (218-213, sì di Cuellar); Fetterman favorevole al documento ma contrario alla legge.' },
+    { id: 'grazia', base: true,
+      t: 'La grazia concessa da Trump a circa 1.500 condannati per l’assalto al Congresso del 6 gennaio 2021 è stata giusta.',
+      ctx: 'Trump l’ha firmata il primo giorno del secondo mandato, includendo chi aveva aggredito agenti di polizia. L’ex vicepresidente Mike Pence l’ha criticata.',
+      p: [-2, -2, -2, -2, -2, -1,  2,  1], liv: 'bbbbbbab',
+      fonte: 'Proclamazione del 20 gennaio 2025; dichiarazioni.' },
+    { id: 'filibuster', base: true,
+      t: 'Il filibuster, la regola che al Senato richiede 60 voti su 100 per approvare quasi tutte le leggi, va abolito.',
+      ctx: 'Durante lo shutdown dell’autunno 2025 Trump ha chiesto ai repubblicani di abolirlo; il leader del Senato John Thune ha rifiutato. In passato erano stati i democratici a volerlo superare.',
+      p: [ 2,  2,  1, -1, -2, -2,  2,  0], liv: 'bbccbbac',
+      fonte: 'Appello di Trump (ottobre 2025); tentativo democratico di riforma (gennaio 2022).' },
+    { id: 'agenzie', base: true,
+      t: 'Il presidente deve poter licenziare liberamente i vertici delle agenzie federali indipendenti.',
+      ctx: 'Il 29 giugno 2026 la Corte Suprema, 6 a 3, gli ha dato ragione sulla Federal Trade Commission, superando un precedente del 1935; ha però lasciato fuori la Federal Reserve.',
+      p: [-2, -2, -2, -2, -1,  1,  2,  1], liv: 'bbbbccac',
+      fonte: 'Trump v. Slaughter (29 giugno 2026).' },
+    { id: 'kimmel', base: true,
+      t: 'Il governo non deve fare pressione sulle televisioni per far sospendere giornalisti o comici critici.',
+      ctx: 'Nel settembre 2025 la ABC ha sospeso Jimmy Kimmel dopo le minacce del presidente dell’autorità per le comunicazioni (FCC), Brendan Carr. Anche il repubblicano Ted Cruz ha paragonato quei metodi a quelli della mafia.',
+      p: [ 2,  2,  2,  2,  2,  2, -1,  2], liv: 'bbbccbbc',
+      fonte: 'Dichiarazioni di Cruz e dei democratici (settembre 2025).' },
+    { id: 'collegi',
+      t: 'I collegi elettorali devono essere disegnati da commissioni indipendenti in tutti gli Stati, non dai partiti.',
+      ctx: 'Nel 2025 il Texas ha ridisegnato i collegi a metà decennio per guadagnare cinque seggi repubblicani, su richiesta di Trump; la California ha risposto con un referendum voluto da Newsom per guadagnarne cinque democratici.',
+      p: [ 2,  2,  1,  2,  1, -1, -2, -1], liv: 'ccbccccc',
+      fonte: 'Ridisegno del Texas (agosto 2025); Proposition 50 in California (novembre 2025).' },
+    { id: 'corte_suprema',
+      t: 'Ai giudici della Corte Suprema, oggi nominati a vita, vanno imposti limiti di mandato.',
+      ctx: 'Lo proponeva Joe Biden nel 2024. Oggi sei giudici su nove sono di nomina repubblicana.',
+      p: [ 2,  2,  2,  1, -1, -2, -2, -1], liv: 'bbbccccc',
+      fonte: 'Proposta di Biden (luglio 2024).' },
+    { id: 'voto_posta',
+      t: 'Il voto per posta va limitato a chi non può andare al seggio.',
+      ctx: 'Trump sostiene che favorisca le frodi e ha promesso di abolirlo; nel 2024 ha votato per posta quasi un elettore su tre.',
+      p: [-2, -2, -2, -1,  0,  1,  2,  1], liv: 'ccccccbc',
+      fonte: 'Dichiarazioni di Trump (agosto 2025).' },
+    { id: 'collegio_elettorale',
+      t: 'Il presidente va eletto con il voto popolare nazionale, superando il Collegio elettorale.',
+      ctx: 'Nel 2000 e nel 2016 il candidato con più voti ha perso le elezioni. Diciassette Stati e Washington hanno aderito a un patto per il voto popolare nazionale.',
+      p: [ 2,  2,  1,  0, -2, -2, -2, -2], liv: 'bbbccccc',
+      fonte: 'National Popular Vote Interstate Compact.' },
+    { id: 'doge',
+      t: 'I tagli di massa ai dipendenti federali avviati nel 2025 con il DOGE di Elon Musk erano necessari.',
+      ctx: 'Secondo l’ufficio del personale federale, nel 2025 hanno lasciato l’amministrazione circa 317.000 dipendenti, tra licenziamenti, uscite incentivate e pensionamenti.',
+      p: [-2, -2, -2, -2, -1,  1,  2,  2], liv: 'bbbbcbab',
+      fonte: 'Dati dell’Office of Personnel Management (2025).' }
+  ]}
+];
+
+/* ============================================================
+   POLITICI. Ogni politico parte dalle posizioni della sua corrente;
+   in "sc" ci sono gli scostamenti e le conferme documentate:
+   id affermazione -> [posizione, livello, nota].
+   Le posizioni non elencate sono quelle della corrente e contano come stime.
+   ============================================================ */
+var POLITICI = [
+  { id: 'sanders', nome: 'Bernie Sanders', ruolo: 'Senatore indipendente del Vermont', g: 0, sc: {
+    patrimoniale: [2, 'a', 'Ha proposto una tassa sui patrimoni dei miliardari.'],
+    salario: [2, 'a', 'Primo firmatario del Raise the Wage Act (17 dollari).'],
+    settimana32: [2, 'a', 'Ha presentato la proposta nel 2024.'],
+    m4a: [2, 'a', 'Primo firmatario di Medicare for All al Senato.'],
+    farmaci: [2, 'b', 'Chiede da anni prezzi allineati a quelli degli altri Paesi.'],
+    israele_armi: [2, 'a', 'Ha promosso le risoluzioni per bloccare le vendite (2025 e 2026).'],
+    iran_congresso: [2, 'a', 'Ha votato per fermare la guerra senza autorizzazione.'],
+    ucraina: [1, 'b', 'Ha votato gli aiuti del 2024.'],
+    carte_credito: [2, 'a', 'Proposta di legge con Hawley (2025).'],
+    intel: [1, 'b', 'Ha approvato l’ingresso dello Stato in Intel, chiedendo un ritorno per i contribuenti.'],
+    data_center: [2, 'b', 'Ha proposto una moratoria nazionale (dicembre 2025).'],
+    h1b: [1, 'b', 'Critica il programma perché abbassa i salari.'],
+    nucleare: [-1, 'b', 'Storicamente contrario a nuove centrali.'],
+    fracking: [2, 'b', 'Chiede di vietarlo.'],
+    gnd: [2, 'a', 'Cofirmatario del Green New Deal.'],
+    abolire_ice: [1, 'c', 'Critico verso l’ICE, senza una richiesta esplicita di abolirla.'],
+    aca: [2, 'a', 'Ha votato per prorogare i sussidi.']
+  }},
+  { id: 'aoc', nome: 'Alexandria Ocasio-Cortez', ruolo: 'Deputata democratica di New York', g: 0, sc: {
+    gnd: [2, 'a', 'Prima firmataria del Green New Deal alla Camera (2019).'],
+    abolire_ice: [2, 'b', 'Lo chiede dal 2018 e lo ha ribadito nel 2026.'],
+    israele_armi: [2, 'b', 'Favorevole a bloccare le armi offensive; nel 2025 ha però votato contro il taglio dei fondi alla difesa antimissile israeliana.'],
+    carte_credito: [2, 'b', 'Ha proposto alla Camera un tetto del 10%.'],
+    iran_congresso: [2, 'a', 'Ha votato la risoluzione del 3 giugno 2026.'],
+    m4a: [2, 'a', 'Cofirmataria di Medicare for All.'],
+    ucraina: [1, 'b', 'Ha votato gli aiuti del 2024.'],
+    atlete_trans: [-2, 'a', 'Ha votato contro il divieto (gennaio 2025).'],
+    cure_trans: [-2, 'a', 'Ha votato contro la legge Greene (dicembre 2025).'],
+    laken_riley: [-2, 'a', 'Ha votato contro.'],
+    save_act: [-2, 'a', 'Ha votato contro.']
+  }},
+  { id: 'mamdani', nome: 'Zohran Mamdani', ruolo: 'Sindaco socialista di New York dal 2026', g: 0, sc: {
+    abolire_ice: [2, 'b', 'Si è unito alle richieste di abolire l’ICE.'],
+    iran_attacco: [-2, 'b', 'Ha messo in guardia contro la guerra (marzo 2026).'],
+    milionari: [2, 'b', 'Propone un’imposta del 2% sui redditi oltre il milione a New York.'],
+    impresa: [2, 'b', 'Propone di alzare l’imposta sulle imprese a New York.'],
+    israele_armi: [2, 'b', 'Critico durissimo del governo israeliano.'],
+    polizia: [0, 'b', 'Ha promesso di non tagliare gli agenti, ma di spostare risorse su un nuovo dipartimento per la sicurezza di comunità.'],
+    case_fondi: [2, 'c', ''],
+    ucraina: [0, 'c', '']
+  }},
+  { id: 'warren', nome: 'Elizabeth Warren', ruolo: 'Senatrice democratica del Massachusetts', g: 1, sc: {
+    patrimoniale: [2, 'a', 'Prima firmataria dell’Ultra-Millionaire Tax Act.'],
+    cripto: [-2, 'a', 'Ha guidato l’opposizione al GENIUS Act.'],
+    antitrust: [2, 'b', 'Propone da anni di spezzare i grandi gruppi tecnologici.'],
+    m4a: [2, 'a', 'Cofirmataria di Medicare for All.'],
+    israele_armi: [2, 'a', 'Ha votato per bloccare le vendite (aprile 2026).'],
+    iran_congresso: [2, 'a', 'Ha votato per fermare la guerra senza autorizzazione.'],
+    abolire_ice: [1, 'b', 'Dice che l’ICE va «totalmente riorganizzata», senza chiederne l’abolizione.'],
+    aca: [2, 'a', 'Ha votato per prorogare i sussidi.'],
+    ucraina: [2, 'b', 'Ha sostenuto gli aiuti a Kyiv.'],
+    filibuster: [2, 'b', 'Favorevole ad abolirlo.']
+  }},
+  { id: 'khanna', nome: 'Ro Khanna', ruolo: 'Deputato democratico della California', g: 1, sc: {
+    iran_congresso: [2, 'a', 'Ha promosso con Massie le risoluzioni sui poteri di guerra.'],
+    israele_armi: [2, 'b', 'Favorevole a sospendere le armi offensive.'],
+    cripto: [1, 'b', 'Tra i democratici più aperti alle criptovalute.'],
+    h1b: [-2, 'c', 'Rappresenta la Silicon Valley, che difende il programma.'],
+    m4a: [2, 'a', 'Cofirmatario di Medicare for All.'],
+    antitrust: [2, 'b', 'Sostiene un antitrust più duro.']
+  }},
+  { id: 'raskin', nome: 'Jamie Raskin', ruolo: 'Deputato democratico del Maryland', g: 1, sc: {
+    grazia: [-2, 'b', 'Ex membro della commissione d’inchiesta sul 6 gennaio.'],
+    agenzie: [-2, 'b', 'Contrario all’espansione dei poteri presidenziali.'],
+    corte_suprema: [2, 'b', 'Favorevole ai limiti di mandato.'],
+    kimmel: [2, 'b', 'Ha denunciato le pressioni della FCC.'],
+    iran_congresso: [2, 'a', 'Ha votato la risoluzione del 3 giugno 2026.']
+  }},
+  { id: 'harris', nome: 'Kamala Harris', ruolo: 'Ex vicepresidente, candidata democratica nel 2024', g: 2, sc: {
+    impresa: [2, 'b', 'Il suo programma del 2024 prevedeva il 28%.'],
+    mance: [2, 'b', 'Ha proposto di non tassare le mance (2024).'],
+    fracking: [-2, 'b', 'Nel 2024 si è detta contraria a vietarlo.'],
+    m4a: [-1, 'b', 'Lo sosteneva nel 2019, non più nel 2024.'],
+    ucraina: [2, 'b', 'Sostenitrice degli aiuti a Kyiv.'],
+    nato: [2, 'b', ''],
+    aborto_legge: [2, 'b', 'Tema centrale della sua campagna del 2024.']
+  }},
+  { id: 'newsom', nome: 'Gavin Newsom', ruolo: 'Governatore democratico della California', g: 2, sc: {
+    patrimoniale: [-1, 'b', 'Si oppone alla patrimoniale sui miliardari proposta in California (2026).'],
+    atlete_trans: [1, 'b', 'Ha definito «profondamente ingiusta» la partecipazione delle atlete trans (2025).'],
+    collegi: [0, 'a', 'Ha promosso il referendum del 2025 per ridisegnare i collegi californiani a favore dei democratici.'],
+    permessi: [2, 'a', 'Ha firmato nel 2025 la riforma della legge ambientale per costruire case.'],
+    pena_morte: [2, 'a', 'Ha sospeso le esecuzioni in California (2019).'],
+    fracking: [1, 'b', 'Ha avviato lo stop ai nuovi permessi in California.'],
+    guardia_nazionale: [-2, 'a', 'Ha fatto causa a Trump per l’invio della Guardia nazionale a Los Angeles.'],
+    ia_stati: [2, 'a', 'Ha firmato nel 2025 una legge californiana sulla sicurezza dell’IA.'],
+    cannabis: [2, 'b', 'Promotore della legalizzazione in California (2016).']
+  }},
+  { id: 'jeffries', nome: 'Hakeem Jeffries', ruolo: 'Leader dei democratici alla Camera', g: 2, sc: {
+    abolire_ice: [-1, 'b', 'Chiede riforme dell’ICE, non l’abolizione.'],
+    aca: [2, 'a', 'Ha guidato la petizione per il voto sulla proroga.'],
+    israele_armi: [-1, 'c', 'Vicino alle posizioni filo-israeliane del partito.'],
+    save_act: [-2, 'a', 'Ha votato contro.'],
+    iran_congresso: [2, 'a', 'Ha sostenuto la risoluzione del 3 giugno 2026.'],
+    laken_riley: [-2, 'b', 'Contrario alla legge.']
+  }},
+  { id: 'schumer', nome: 'Chuck Schumer', ruolo: 'Leader dei democratici al Senato', g: 2, sc: {
+    israele_armi: [-2, 'a', 'Ha votato contro le risoluzioni di Sanders (aprile 2026).'],
+    chip_cina: [2, 'b', 'Ha accusato Trump di «svendere l’America» sui chip Nvidia.'],
+    cannabis: [2, 'a', 'Primo firmatario della legalizzazione al Senato.'],
+    iran_congresso: [2, 'a', 'Ha votato per fermare la guerra senza autorizzazione.'],
+    save_act: [-2, 'b', 'Ha parlato di «restrizioni in stile Jim Crow».'],
+    aca: [2, 'a', 'Ha guidato la battaglia sui sussidi durante lo shutdown.'],
+    filibuster: [1, 'b', 'Nel 2022 ha tentato di cambiare la regola sulle leggi elettorali.']
+  }},
+  { id: 'fetterman', nome: 'John Fetterman', ruolo: 'Senatore democratico della Pennsylvania', g: 3, sc: {
+    iran_attacco: [2, 'b', 'Ha sostenuto l’attacco all’Iran.'],
+    iran_congresso: [-2, 'a', 'Unico democratico a votare contro le risoluzioni sui poteri di guerra.'],
+    israele_armi: [-2, 'a', 'Ha votato contro le risoluzioni di Sanders.'],
+    laken_riley: [2, 'a', 'Tra i promotori al Senato.'],
+    save_act: [0, 'b', 'Favorevole al documento d’identità, contrario alla legge così com’è (marzo 2026).'],
+    fracking: [-2, 'b', 'Difende il fracking in Pennsylvania.'],
+    trivelle: [2, 'b', ''],
+    cannabis: [2, 'b', 'Da vicegovernatore ha fatto campagna per la legalizzazione.'],
+    salario: [2, 'c', ''],
+    aca: [2, 'b', 'Favorevole alla proroga, ma ha votato per chiudere lo shutdown.'],
+    ucraina: [2, 'b', '']
+  }},
+  { id: 'shapiro', nome: 'Josh Shapiro', ruolo: 'Governatore democratico della Pennsylvania', g: 3, sc: {
+    pena_morte: [2, 'b', 'Ha detto che non firmerà condanne a morte e ha chiesto di abolirla (2023).'],
+    voucher: [1, 'b', 'Si è detto favorevole ai buoni scuola (2023).'],
+    fracking: [-2, 'b', ''],
+    israele_armi: [-2, 'c', ''],
+    cannabis: [2, 'b', 'Chiede di legalizzarla in Pennsylvania.'],
+    guardia_nazionale: [-2, 'c', '']
+  }},
+  { id: 'golden', nome: 'Jared Golden', ruolo: 'Deputato democratico del Maine', g: 3, sc: {
+    fucili_assalto: [2, 'b', 'Ha cambiato posizione dopo la strage di Lewiston del 2023.'],
+    save_act: [1, 'a', 'Uno dei quattro democratici a votare il SAVE Act nel 2025.'],
+    laken_riley: [2, 'a', 'Ha votato a favore.'],
+    sindacati_federali: [2, 'a', 'Primo firmatario della legge approvata nel dicembre 2025.'],
+    pro_act: [2, 'b', ''],
+    tcja: [-2, 'b', 'Ha votato contro la legge di bilancio del 2025.']
+  }},
+  { id: 'collins', nome: 'Susan Collins', ruolo: 'Senatrice repubblicana del Maine', g: 4, sc: {
+    medicaid_tagli: [1, 'b', 'Ha votato contro la legge di bilancio del 2025, citando i tagli a Medicaid.'],
+    iran_congresso: [2, 'a', 'Ha votato per fermare la guerra senza autorizzazione (giugno 2026).'],
+    dazi_congresso: [2, 'a', 'Ha votato contro i dazi globali (ottobre 2025).'],
+    dazi: [-2, 'a', ''],
+    aborto_legge: [1, 'a', 'Ha presentato con Murkowski una legge per tutelare l’aborto.'],
+    planned_parenthood: [-2, 'b', 'Contraria al taglio dei fondi.'],
+    usaid: [-2, 'a', 'Ha votato contro il taglio degli aiuti esteri (luglio 2025).'],
+    obergefell: [-2, 'a', 'Ha votato il Respect for Marriage Act (2022).'],
+    maduro: [0, 'b', 'Ha votato per limitare i poteri di guerra sul Venezuela.']
+  }},
+  { id: 'murkowski', nome: 'Lisa Murkowski', ruolo: 'Senatrice repubblicana dell’Alaska', g: 4, sc: {
+    trivelle: [2, 'b', 'Sostiene le trivellazioni in Alaska.'],
+    iran_congresso: [2, 'a', 'Ha votato per fermare la guerra senza autorizzazione (giugno 2026).'],
+    dazi_congresso: [2, 'a', 'Ha votato contro i dazi globali (ottobre 2025).'],
+    dazi: [-2, 'a', ''],
+    usaid: [-2, 'a', 'Ha votato contro il taglio degli aiuti esteri (luglio 2025).'],
+    aborto_legge: [1, 'a', 'Ha presentato con Collins una legge per tutelare l’aborto.'],
+    obergefell: [-2, 'a', 'Ha votato il Respect for Marriage Act (2022).'],
+    medicaid_tagli: [0, 'b', 'Ha votato la legge di bilancio del 2025 dopo aver ottenuto concessioni per l’Alaska.'],
+    maduro: [0, 'b', 'Ha votato per limitare i poteri di guerra sul Venezuela.']
+  }},
+  { id: 'fitzpatrick', nome: 'Brian Fitzpatrick', ruolo: 'Deputato repubblicano della Pennsylvania', g: 4, sc: {
+    medicaid_tagli: [1, 'b', 'Ha votato contro la versione finale della legge di bilancio del 2025.'],
+    aca: [2, 'a', 'Ha firmato la petizione e votato la proroga (gennaio 2026).'],
+    iran_congresso: [2, 'a', 'Uno dei quattro repubblicani a votare la risoluzione del 3 giugno 2026.'],
+    ucraina: [2, 'b', 'Tra i promotori di nuovi aiuti a Kyiv alla Camera.'],
+    controlli: [2, 'a', 'Ha votato i controlli universali nel 2021.'],
+    fucili_assalto: [2, 'a', 'Uno dei due repubblicani a votare il divieto nel 2022.'],
+    pro_act: [1, 'a', 'Ha votato il PRO Act nel 2021.'],
+    sindacati_federali: [2, 'a', 'Ha promosso con Golden la legge approvata nel dicembre 2025.']
+  }},
+  { id: 'mcconnell', nome: 'Mitch McConnell', ruolo: 'Senatore repubblicano del Kentucky, ex leader al Senato', g: 5, sc: {
+    dazi: [-2, 'a', 'Ha votato contro i dazi globali, sul Canada e sul Brasile (ottobre 2025).'],
+    dazi_congresso: [2, 'a', ''],
+    ucraina: [2, 'b', 'Il più convinto sostenitore di Kyiv tra i senatori repubblicani.'],
+    nato: [2, 'b', ''],
+    vaccini_cdc: [-2, 'b', 'Sopravvissuto alla polio, difende i vaccini; ha votato contro la nomina di Kennedy.'],
+    filibuster: [-2, 'b', 'Difensore storico della regola.'],
+    obergefell: [0, 'b', 'Ha votato contro il Respect for Marriage Act (2022).']
+  }},
+  { id: 'pence', nome: 'Mike Pence', ruolo: 'Ex vicepresidente di Trump', g: 5, sc: {
+    iran_attacco: [2, 'b', 'Si è detto «orgoglioso» di Trump per l’attacco all’Iran.'],
+    dazi: [-2, 'b', 'Critica i dazi di Trump.'],
+    grazia: [-2, 'b', 'Ha criticato la grazia ai condannati del 6 gennaio.'],
+    aborto_15: [2, 'b', 'Sostiene un divieto nazionale.'],
+    mifepristone: [2, 'b', 'Chiede di limitarne la vendita.'],
+    ucraina: [2, 'b', '']
+  }},
+  { id: 'haley', nome: 'Nikki Haley', ruolo: 'Ex ambasciatrice all’ONU, sfidante di Trump nel 2024', g: 5, sc: {
+    iran_attacco: [2, 'b', 'Ha detto che Trump «è andato troppo avanti per fermarsi».'],
+    ucraina: [2, 'b', ''],
+    pensione: [2, 'b', 'Ha proposto di alzare l’età della pensione per i più giovani (2023).'],
+    israele_armi: [-2, 'b', ''],
+    aborto_15: [1, 'b', 'Favorevole a un limite nazionale se c’è consenso.']
+  }},
+  { id: 'trump', nome: 'Donald Trump', ruolo: 'Presidente degli Stati Uniti', g: 6, sc: {
+    deportazioni: [2, 'a', ''], ius_soli: [2, 'a', 'Ordine esecutivo del gennaio 2025.'],
+    iran_attacco: [2, 'a', 'Ha ordinato l’attacco.'], iran_congresso: [-2, 'a', ''],
+    dazi: [2, 'a', ''], dazi_congresso: [-2, 'a', ''], dazi_fisco: [2, 'b', ''],
+    fed: [2, 'a', 'Ha cercato di rimuovere Lisa Cook.'], agenzie: [2, 'a', ''],
+    grazia: [2, 'a', ''], guardia_nazionale: [2, 'a', ''], groenlandia: [2, 'a', ''],
+    maduro: [2, 'a', ''], difesa: [2, 'a', ''], case_fondi: [2, 'a', ''],
+    carte_credito: [2, 'b', 'Ha chiesto un tetto del 10% (gennaio 2026).'],
+    intel: [2, 'a', ''], chip_cina: [-2, 'a', 'Ha autorizzato la vendita dei chip H200.'],
+    ia_stati: [-2, 'a', 'Ordine esecutivo dell’11 dicembre 2025.'],
+    filibuster: [2, 'b', 'Ha chiesto di abolirlo (ottobre 2025).'],
+    vaccini_cdc: [2, 'a', 'Ha ordinato la revisione del calendario.'],
+    aborto_15: [-1, 'b', 'Sostiene che debbano decidere gli Stati.'],
+    cannabis: [0, 'a', 'Ha ordinato la riclassificazione, senza legalizzarla.'],
+    endangerment: [2, 'a', ''], parigi: [-2, 'a', ''], eolico_mare: [2, 'a', ''],
+    h1b: [0, 'b', 'Ha imposto la tassa da 100.000 dollari ma ha difeso il programma.'],
+    pensione: [-2, 'b', 'Ha promesso di non toccare la Social Security.'],
+    mance: [2, 'a', ''], tcja: [2, 'a', ''], carried: [1, 'b', ''],
+    kimmel: [-2, 'b', 'Ha esultato per la sospensione di Kimmel.'],
+    voto_posta: [2, 'b', ''], doge: [2, 'a', ''], usaid: [2, 'a', ''],
+    rifugiati: [-2, 'a', ''], farmaci: [2, 'a', ''], hsa: [2, 'b', ''],
+    medicaid_lavoro: [2, 'a', ''], aca: [-1, 'b', 'Contrario a dare i fondi alle assicurazioni.'],
+    salario: [0, 'c', ''], nato: [0, 'b', ''], ucraina: [-1, 'b', ''],
+    israele_armi: [-2, 'b', ''], dei: [2, 'a', ''], atlete_trans: [2, 'a', ''],
+    save_act: [2, 'b', ''], sindacati_federali: [-2, 'a', 'Ha firmato l’ordine che ha tolto la contrattazione.']
+  }},
+  { id: 'vance', nome: 'JD Vance', ruolo: 'Vicepresidente', g: 6, sc: {
+    figli: [2, 'b', 'Ha proposto un credito di 5.000 dollari per figlio.'],
+    antitrust: [1, 'b', 'Ha elogiato la linea antitrust di Lina Khan.'],
+    ucraina: [-2, 'b', 'Contrario a nuovi aiuti a Kyiv.'],
+    groenlandia: [2, 'b', 'Nel 2025 ha visitato la base americana in Groenlandia criticando la Danimarca.'],
+    maduro: [2, 'b', 'Ha dato il voto decisivo contro la risoluzione sul Venezuela.'],
+    aborto_15: [-1, 'b', 'Sulla linea di Trump: decidono gli Stati.']
+  }},
+  { id: 'johnson', nome: 'Mike Johnson', ruolo: 'Speaker della Camera', g: 6, sc: {
+    cannabis: [-2, 'b', 'Contrario anche alla riclassificazione.'],
+    ucraina: [-1, 'b', 'Nel 2024 fece passare gli aiuti, oggi segue la linea di Trump.'],
+    aca: [-2, 'b', 'Si è opposto alla proroga.'],
+    save_act: [2, 'a', ''],
+    aborto_15: [1, 'c', '']
+  }},
+  { id: 'hawley', nome: 'Josh Hawley', ruolo: 'Senatore repubblicano del Missouri', g: 6, sc: {
+    salario: [2, 'a', 'Ha presentato una legge per un minimo di 15 dollari (2025).'],
+    carte_credito: [2, 'a', 'Proposta di legge con Sanders.'],
+    medicaid_tagli: [1, 'b', 'Ha votato i tagli e poi ha proposto di annullarne una parte.'],
+    ia_stati: [2, 'b', 'Contrario a impedire agli Stati di regolare l’IA.'],
+    ucraina: [-2, 'a', 'Ha votato contro gli aiuti del 2024.'],
+    pro_act: [0, 'b', 'Ha proposto una legge per accelerare i contratti sindacali.'],
+    antitrust: [2, 'b', ''],
+    mifepristone: [2, 'b', 'Chiede di limitarla.'],
+    maduro: [0, 'b', 'Ha votato per limitare i poteri di guerra sul Venezuela, poi ha cambiato voto.']
+  }},
+  { id: 'greene', nome: 'Marjorie Taylor Greene', ruolo: 'Ex deputata repubblicana della Georgia, dimessa nel gennaio 2026', g: 7, sc: {
+    iran_attacco: [-2, 'b', 'Ha accusato Trump di aver tradito «America First» attaccando l’Iran.'],
+    israele_armi: [2, 'b', 'Ha proposto di tagliare 500 milioni di aiuti militari a Israele (luglio 2025).'],
+    aca: [2, 'b', 'Ha rotto con il partito chiedendo di prorogare i sussidi (ottobre 2025).'],
+    h1b: [2, 'b', 'Chiede di abolire il programma.'],
+    cure_trans: [2, 'a', 'Prima firmataria della legge approvata nel dicembre 2025.'],
+    ia_stati: [2, 'b', 'Contraria alla moratoria sulle leggi statali sull’IA.'],
+    grazia: [2, 'b', ''],
+    tcja: [2, 'b', 'Ha votato la legge di bilancio del 2025.'],
+    debito: [1, 'c', ''],
+    dazi: [1, 'c', '']
+  }},
+  { id: 'massie', nome: 'Thomas Massie', ruolo: 'Deputato repubblicano del Kentucky, sconfitto alle primarie del 2026 da un candidato di Trump', g: 7, sc: {
+    debito: [2, 'b', 'Ha votato contro la legge di bilancio del 2025 per l’aumento del debito.'],
+    iran_congresso: [2, 'a', 'Ha promosso con Ro Khanna le risoluzioni sui poteri di guerra.'],
+    iran_attacco: [-2, 'b', ''],
+    israele_armi: [2, 'b', 'Ha votato per tagliare i fondi militari a Israele (luglio 2025).'],
+    nato: [-2, 'a', 'Ha presentato una legge per uscire dalla NATO (dicembre 2025).'],
+    dazi: [-2, 'b', 'Considera i dazi una tassa.'],
+    dazi_congresso: [2, 'b', ''],
+    ucraina: [-2, 'a', 'Ha votato contro gli aiuti del 2024.'],
+    tcja: [1, 'b', 'Favorevole ai tagli fiscali, ha votato contro la legge per il debito.']
+  }},
+  { id: 'paul', nome: 'Rand Paul', ruolo: 'Senatore repubblicano del Kentucky', g: 7, sc: {
+    dazi: [-2, 'a', 'Ha promosso i voti del Senato contro i dazi.'],
+    dazi_congresso: [2, 'a', ''],
+    intel: [-2, 'b', 'Ha definito l’ingresso in Intel un passo verso il socialismo.'],
+    iran_congresso: [2, 'a', 'Unico repubblicano a votare la prima risoluzione, il 4 marzo 2026.'],
+    iran_attacco: [-2, 'b', ''],
+    israele_armi: [-1, 'a', 'Ha votato contro le risoluzioni di Sanders.'],
+    debito: [2, 'b', 'Ha votato contro la legge di bilancio del 2025 per l’aumento del tetto al debito.'],
+    maduro: [-2, 'b', 'Ha votato per limitare i poteri di guerra sul Venezuela.'],
+    ucraina: [-2, 'a', 'Ha votato contro gli aiuti del 2024.'],
+    pensione: [2, 'b', 'Ha proposto di alzare gradualmente l’età della pensione.'],
+    obergefell: [1, 'b', 'Ha votato contro il Respect for Marriage Act (2022).']
+  }}
+];
+
+
+var PCA = {"media":[-0.5769,-0.1923,-0.0769,-0.2308,0.4231,1.0769,-0.3846,0.8077,0,-1.1538,0.5769,-0.1154,-0.8846,0.3846,1.1923,0.3846,-0.5,0.7692,-1.0385,0.3462,0.5769,-0.4615,-1.0769,0.6923,-0.5769,0.5769,-0.3077,0.2308,0.2692,-0.2308,-0.8077,0.9231,0.4231,0.9231,-1.0385,-1.1154,-0.1154,-0.3846,-0.9615,0.7692,-0.5,0.6923,0.7692,-0.4231,0.8846,-1.0385,-0.3077,-0.5769,-0.6538,0.6154,-0.5,-0.4615,0.4615,0.3462,1.0385,0.4615,-0.6923,-1,1.1923,-0.5769,0.1923,-0.8846,0.4615,0.7692,0,-0.2308,-0.8077,-1.1154,-0.4615,0.0769,0.7308,0.2308,-0.6154,1.3462,-0.0769,-0.1154,-0.7692,-0.0385,0.7692,0.6154,-0.8846,1.0769,-1.1538,0.5,1.0769,-0.4231,1.0385,1.1538,0.2692,0.6923,0.2692,-0.9231,0.3462,-0.5769,1.5,0.3846,0.1154,-0.3462,-0.3846,-0.4615],"W":[[-0.1123,0.1317,0.0745,-0.1321,-0.1037,0.0337,0.1096,-0.07,-0.1346,0.0705,-0.0964,0.1335,0.0566,-0.116,-0.0598,-0.1357,-0.1176,-0.0972,-0.0824,-0.136,-0.118,0.127,-0.0789,-0.1073,0.118,0.1167,0.0269,-0.1245,0.1202,0.1245,-0.1005,-0.0952,-0.1258,-0.0432,0.0877,0.0781,0.1335,0.1356,0.0929,0.0968,0.087,-0.0884,-0.0707,-0.0723,-0.0383,0.0746,0.0791,0.0941,0.1172,0.0027,-0.1176,0.127,0.1158,-0.1281,0.0423,-0.127,0.1081,-0.085,0.0495,-0.0462,-0.1327,0.0862,0.116,-0.0843,0.1346,0.1245,0.1023,0.0772,0.1262,0.1321,-0.111,-0.1341,0.1057,0.0379,-0.1278,0.1335,-0.0968,-0.1005,0.0833,-0.1121,0.0482,-0.0451,0.0791,-0.0486,-0.0453,-0.005,-0.0688,-0.0532,0.0878,-0.0422,0.1308,0.0983,-0.0385,0.1172,-0.0484,-0.1037,-0.1248,0.1146,-0.1213,0.127],[0.1121,-0.0064,-0.1239,0.0778,0.0541,-0.0388,-0.0009,0.077,0.0226,0.1076,0.0247,0.0069,-0.1067,0.0138,0.0066,-0.0718,0.1094,-0.0237,0.1324,-0.062,-0.1075,0.0847,0.1247,-0.0545,0.1075,-0.1337,0.1181,-0.0296,-0.0543,0.0296,0.1426,-0.0585,-0.0273,0.0841,0.1597,0.0987,0.0069,0.0719,0.1292,-0.1007,-0.0671,0.0207,-0.2091,0.1823,-0.1832,0.0888,-0.091,-0.0535,0.1272,-0.2004,0.1094,0.0847,-0.0985,-0.0552,-0.1243,-0.0847,0.0924,0.1312,-0.1105,0.07,-0.0266,-0.0232,-0.0864,0.0681,-0.0226,0.0296,0.0319,0.0609,0.0469,-0.0397,-0.0837,-0.0347,0.0753,-0.1072,0.0188,0.0069,0.1007,0.0845,-0.1414,-0.0542,0.1444,-0.1452,0.1522,0.192,0.1226,0.161,-0.1758,0.0261,-0.058,0.1321,-0.0861,0.158,0.2616,0.0696,-0.0993,-0.0623,0.0377,0.0145,0.0838,0.0847]]};
+
+var P = { seggi: 435, maggioranza: 218, pesoPriorita: 2, maxPriorita: 3, soglia: 0.03, nitidezza: 9 };
+var SCALA = [[-2, 'Per niente'], [-1, 'Poco'], [0, 'Neutrale'], [1, 'Abbastanza'], [2, 'Del tutto']];
+var ESTESA = { '-2': 'per niente d’accordo', '-1': 'poco d’accordo', '0': 'neutrale', '1': 'abbastanza d’accordo', '2': 'del tutto d’accordo' };
+var LIVELLI = { a: 'voto o atto ufficiale', b: 'dichiarazione o indicazione indiretta', c: 'stima' };
+
+var AFF = [];
+TEMI.forEach(function (t) { t.aff.forEach(function (a) { a.tema = t; a.j = AFF.length; AFF.push(a); }); });
+var PER_ID = {}; AFF.forEach(function (a) { PER_ID[a.id] = a; });
+POLITICI.forEach(function (p) { var parti = p.nome.split(' '); p.breve = parti[parti.length - 1]; });
+
+function posPol(p, a) { var s = p.sc[a.id]; return s ? s[0] : a.p[p.g]; }
+function livPol(p, a) { var s = p.sc[a.id]; return s ? s[1] : 'c'; }
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function pct(x) { return Math.round(x * 100) + '%'; }
+function elenco(n) { return n.length < 2 ? n.join('') : n.slice(0, -1).join(', ') + ' e ' + n[n.length - 1]; }
+function nelTest(a, modo) { return modo === 'completo' || !!a.base; }
+function conta(modo) { return AFF.filter(function (a) { return nelTest(a, modo); }).length; }
+function numero(v) { return typeof v === 'number'; }
+
+/* ---------- Calcolo ---------- */
+function calcola(r, pr) {
+  var nG = GRUPPI.length, nP = POLITICI.length;
+  var dG = new Array(nG).fill(0), dP = new Array(nP).fill(0), docP = new Array(nP).fill(0);
+  var peso = 0, contate = 0, saltate = 0, perTemaG = {}, perTemaP = {};
+  TEMI.forEach(function (t) {
+    var w = pr.has(t.id) ? P.pesoPriorita : 1, tg = new Array(nG).fill(0), tp = new Array(nP).fill(0), c = 0;
+    t.aff.forEach(function (a) {
+      var u = r[a.id];
+      if (u === 'x') { saltate++; return; }
+      if (!numero(u)) return;
+      for (var g = 0; g < nG; g++) { var d = Math.abs(u - a.p[g]) / 4; dG[g] += w * d; tg[g] += d; }
+      for (var q = 0; q < nP; q++) {
+        var p = POLITICI[q], d2 = Math.abs(u - posPol(p, a)) / 4;
+        dP[q] += w * d2; tp[q] += d2;
+        if (livPol(p, a) !== 'c') docP[q]++;
+      }
+      peso += w; c++; contate++;
+    });
+    if (c) { perTemaG[t.id] = tg.map(function (d) { return 1 - d / c; }); perTemaP[t.id] = tp.map(function (d) { return 1 - d / c; }); }
+  });
+  if (!contate) return { vuoto: true, saltate: saltate };
+  var affG = dG.map(function (d) { return 1 - d / peso; });
+  var affP = dP.map(function (d) { return 1 - d / peso; });
+  var voti = affG.map(function (a) { return Math.exp(P.nitidezza * a); });
+  var tot = voti.reduce(function (s, v) { return s + v; }, 0);
+  var quote = voti.map(function (v) { return v / tot; });
+  var seggi = dhondt(quote.map(function (q) { return q >= P.soglia ? q : 0; }), P.seggi);
+  return { affinita: affG, affP: affP, docP: docP, seggi: seggi, perTema: perTemaG, perTemaP: perTemaP, contate: contate, saltate: saltate };
+}
+function dhondt(voti, totale) {
+  var s = voti.map(function () { return 0; });
+  for (var k = 0; k < totale; k++) {
+    var best = -1, bq = -1;
+    for (var i = 0; i < voti.length; i++) { var q = voti[i] / (s[i] + 1); if (q > bq) { bq = q; best = i; } }
+    s[best]++;
+  }
+  return s;
+}
+function coesione(f, g, pr) {
+  var d = 0, w = 0;
+  TEMI.forEach(function (t) {
+    var p = pr.has(t.id) ? P.pesoPriorita : 1;
+    t.aff.forEach(function (a) { d += p * Math.abs(a.p[f] - a.p[g]) / 4; w += p; });
+  });
+  return 1 - d / w;
+}
+function coalizioni(seggi, pr) {
+  var idx = []; seggi.forEach(function (s, i) { if (s > 0) idx.push(i); });
+  var out = [];
+  for (var m = 1; m < (1 << idx.length); m++) {
+    var membri = idx.filter(function (_, k) { return m & (1 << k); });
+    var tot = membri.reduce(function (s, i) { return s + seggi[i]; }, 0);
+    if (tot < P.maggioranza) continue;
+    if (!membri.every(function (i) { return tot - seggi[i] < P.maggioranza; })) continue;
+    var c = 1;
+    if (membri.length > 1) {
+      var somma = 0, k = 0;
+      for (var a = 0; a < membri.length; a++) for (var b = a + 1; b < membri.length; b++) { somma += coesione(membri[a], membri[b], pr); k++; }
+      c = somma / k;
+    }
+    out.push({ membri: membri, seggi: tot, coesione: c });
+  }
+  out.sort(function (x, y) { return y.coesione - x.coesione || x.membri.length - y.membri.length; });
+  return out;
+}
+
+/* Proiezione sugli assi della mappa (minimi quadrati sulle sole affermazioni risposte) */
+function proiettore(risposte) {
+  var J = AFF.filter(function (a) { return numero(risposte[a.id]); }).map(function (a) { return a.j; });
+  var w1 = PCA.W[0], w2 = PCA.W[1], m11 = 0, m12 = 0, m22 = 0;
+  J.forEach(function (j) { m11 += w1[j] * w1[j]; m12 += w1[j] * w2[j]; m22 += w2[j] * w2[j]; });
+  var det = m11 * m22 - m12 * m12;
+  return function (valore) {
+    var b1 = 0, b2 = 0;
+    J.forEach(function (j) { var x = valore(AFF[j]) - PCA.media[j]; b1 += x * w1[j]; b2 += x * w2[j]; });
+    if (Math.abs(det) < 1e-9) return { x: b1 / (m11 || 1), y: 0 };
+    return { x: (m22 * b1 - m12 * b2) / det, y: (m11 * b2 - m12 * b1) / det };
+  };
+}
+
+/* ---------- Emiciclo ---------- */
+var GEO = { w: 800, h: 420, cx: 400, cy: 404, r0: 140, r1: 388, file: 11, raggio: 7.6 };
+function postiEmiciclo(N) {
+  var raggi = [], somma = 0, j, k;
+  for (j = 0; j < GEO.file; j++) { raggi.push(GEO.r0 + (GEO.r1 - GEO.r0) * j / (GEO.file - 1)); somma += raggi[j]; }
+  var n = raggi.map(function (r) { return Math.round(N * r / somma); });
+  n[GEO.file - 1] += N - n.reduce(function (s, v) { return s + v; }, 0);
+  var posti = [];
+  for (j = 0; j < GEO.file; j++) for (k = 0; k < n[j]; k++) {
+    var th = Math.PI - k * Math.PI / (n[j] - 1);
+    posti.push({ x: GEO.cx + raggi[j] * Math.cos(th), y: GEO.cy - raggi[j] * Math.sin(th), th: th, r: raggi[j] });
+  }
+  posti.sort(function (a, b) { return (b.th - a.th) || (a.r - b.r); });
+  return posti;
+}
+var POSTI = postiEmiciclo(P.seggi);
+function svgEmiciclo(colori, gruppi) {
+  var s = '<svg viewBox="0 0 ' + GEO.w + ' ' + GEO.h + '" role="img" aria-label="Emiciclo di 435 seggi">';
+  POSTI.forEach(function (p, i) {
+    s += '<circle class="seggio"' + (gruppi ? ' data-g="' + gruppi[i] + '"' : '') + ' cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + GEO.raggio + '" fill="' + colori[i] + '"/>';
+  });
+  s += '<line x1="' + GEO.cx + '" y1="' + (GEO.cy - GEO.r1 - 10) + '" x2="' + GEO.cx + '" y2="' + (GEO.cy - GEO.r0 + 18) + '" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6" opacity=".55"/>';
+  s += '<text x="' + GEO.cx + '" y="' + (GEO.cy - 18) + '" text-anchor="middle" fill="currentColor" style="font-family:var(--font-titolo);font-weight:700;font-size:64px">218</text>';
+  return s + '</svg>';
+}
+function emicicloVuoto() {
+  var demo = [30, 55, 95, 32, 22, 48, 118, 35], col = [];
+  demo.forEach(function (n, g) { for (var i = 0; i < n; i++) col.push(GRUPPI[g].colore); });
+  $('emiciclo-vuoto').innerHTML = svgEmiciclo(col);
+  $('emiciclo-vuoto').style.opacity = '.9';
+}
+
+/* ---------- Mappa ---------- */
+var MAPPA = { w: 600, h: 440, sx: 16, dx: 16, su: 30, giu: 50 };
+var ultimeRisposte = null;
+function disegnaMappa(risposte) {
+  ultimeRisposte = risposte;
+  var box = $('mappa');
+  var larg = Math.round(Math.max(320, Math.min(640, (box.clientWidth || 600) - 16)));
+  MAPPA.w = larg; MAPPA.h = Math.round(larg < 480 ? larg * 1.3 : larg * 0.74);
+  var fonte = larg < 480 ? 11.5 : 13;
+  var proietta = proiettore(risposte);
+  var punti = POLITICI.map(function (p, i) { var s = proietta(function (a) { return posPol(p, a); }); return { p: p, i: i, x: s.x, y: s.y }; });
+  var tu = proietta(function (a) { return risposte[a.id]; });
+  var xs = punti.map(function (q) { return q.x; }).concat(tu.x), ys = punti.map(function (q) { return q.y; }).concat(tu.y);
+  var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+  var px = (x1 - x0) * 0.1 || 1, py = (y1 - y0) * 0.14 || 1;
+  x0 -= px; x1 += px; y0 -= py; y1 += py;
+  var L = MAPPA.sx, R = MAPPA.w - MAPPA.dx, T = MAPPA.su, B = MAPPA.h - MAPPA.giu;
+  function sx(v) { return L + (v - x0) / (x1 - x0) * (R - L); }
+  function sy(v) { return B - (v - y0) / (y1 - y0) * (B - T); }
+  punti.forEach(function (q) { q.X = sx(q.x); q.Y = sy(q.y); });
+  var TX = sx(tu.x), TY = sy(tu.y);
+
+  // politici vicini sulla mappa condividono un'etichetta
+  var soglia = Math.max(22, MAPPA.w * 0.05), grappoli = [];
+  punti.forEach(function (q) {
+    var g = grappoli.filter(function (c) { return Math.hypot(c.X - q.X, c.Y - q.Y) < soglia; })[0];
+    if (g) { g.membri.push(q); g.X = g.membri.reduce(function (s, m) { return s + m.X; }, 0) / g.membri.length; g.Y = g.membri.reduce(function (s, m) { return s + m.Y; }, 0) / g.membri.length; }
+    else grappoli.push({ membri: [q], X: q.X, Y: q.Y });
+  });
+
+  var s = '<svg viewBox="0 0 ' + MAPPA.w + ' ' + MAPPA.h + '" role="img" aria-label="Mappa: la tua posizione rispetto a ' + POLITICI.length + ' politici americani">';
+  s += '<rect x="' + L + '" y="' + T + '" width="' + (R - L) + '" height="' + (B - T) + '" fill="none" stroke="currentColor" stroke-opacity=".18"/>';
+  var mx = (L + R) / 2, my = (T + B) / 2;
+  s += '<line x1="' + mx + '" y1="' + T + '" x2="' + mx + '" y2="' + B + '" stroke="currentColor" stroke-opacity=".12" stroke-dasharray="3 5"/>';
+  s += '<line x1="' + L + '" y1="' + my + '" x2="' + R + '" y2="' + my + '" stroke="currentColor" stroke-opacity=".12" stroke-dasharray="3 5"/>';
+  s += '<text class="asse" x="' + L + '" y="' + (T - 10) + '">↑ CONTRO L’ESTABLISHMENT</text>';
+  s += '<text class="asse" x="' + L + '" y="' + (B + 18) + '">↓ CON L’ESTABLISHMENT</text>';
+  s += '<text class="asse" x="' + L + '" y="' + (MAPPA.h - 8) + '">← SINISTRA</text>';
+  s += '<text class="asse" x="' + R + '" y="' + (MAPPA.h - 8) + '" text-anchor="end">DESTRA →</text>';
+  punti.forEach(function (q) {
+    s += '<circle class="punto" cx="' + q.X.toFixed(1) + '" cy="' + q.Y.toFixed(1) + '" r="6" fill="' + GRUPPI[q.p.g].colore + '" stroke="var(--foglio)" stroke-width="1.5"><title>' + esc(q.p.nome) + '</title></circle>';
+  });
+  s += '<circle cx="' + TX.toFixed(1) + '" cy="' + TY.toFixed(1) + '" r="11" fill="none" stroke="currentColor" stroke-width="3"/>';
+  s += '<circle cx="' + TX.toFixed(1) + '" cy="' + TY.toFixed(1) + '" r="3.5" fill="currentColor"/>';
+
+  // etichette: evitano i punti, il tuo segno e le altre etichette
+  var occupati = [{ x0: TX - 13, y0: TY - 13, x1: TX + 13, y1: TY + 13 }];
+  punti.forEach(function (q) { occupati.push({ x0: q.X - 7, y0: q.Y - 7, x1: q.X + 7, y1: q.Y + 7 }); });
+  function libero(b) {
+    if (b.x0 < L + 2 || b.x1 > R - 2 || b.y0 < T + 2 || b.y1 > B - 2) return false;
+    return occupati.every(function (o) { return b.x1 < o.x0 || b.x0 > o.x1 || b.y1 < o.y0 || b.y0 > o.y1; });
+  }
+  function piazza(cx, cy, righe, dimensione, raggio) {
+    var lw = Math.max.apply(null, righe.map(function (t) { return t.length; })) * dimensione * 0.6 + 4;
+    var lh = righe.length * dimensione * 1.2;
+    var prove = [];
+    [raggio + 4, raggio + 14, raggio + 26].forEach(function (d) {
+      prove.push({ x: cx + d, y: cy - lh / 2, a: 'start' }, { x: cx - d, y: cy - lh / 2, a: 'end' },
+        { x: cx - lw / 2, y: cy - d - lh, a: 'middle' }, { x: cx - lw / 2, y: cy + d, a: 'middle' },
+        { x: cx + d, y: cy - lh - 2, a: 'start' }, { x: cx + d, y: cy + 2, a: 'start' },
+        { x: cx - d, y: cy - lh - 2, a: 'end' }, { x: cx - d, y: cy + 2, a: 'end' });
+    });
+    var scelta = null, migliore = null;
+    function costo(b) {
+      var c = 0;
+      c += Math.max(0, L + 2 - b.x0) * lh + Math.max(0, b.x1 - (R - 2)) * lh + Math.max(0, T + 2 - b.y0) * lw + Math.max(0, b.y1 - (B - 2)) * lw;
+      occupati.forEach(function (o) { var w = Math.min(b.x1, o.x1) - Math.max(b.x0, o.x0), h = Math.min(b.y1, o.y1) - Math.max(b.y0, o.y0); if (w > 0 && h > 0) c += w * h; });
+      return c;
+    }
+    for (var k = 0; k < prove.length && !scelta; k++) {
+      var p = prove[k], bx0 = p.a === 'end' ? p.x - lw : p.x, b = { x0: bx0, y0: p.y, x1: bx0 + lw, y1: p.y + lh };
+      if (libero(b)) scelta = { p: p, b: b };
+      else { var cc = costo(b); if (!migliore || cc < migliore.c) migliore = { p: p, b: b, c: cc }; }
+    }
+    if (!scelta) scelta = migliore;
+    occupati.push(scelta.b);
+    var ax = scelta.p.a === 'middle' ? scelta.b.x0 + lw / 2 : scelta.p.x;
+    return righe.map(function (t, r) { return { x: ax, y: scelta.p.y + (r + 0.85) * dimensione * 1.2, a: scelta.p.a, t: t }; });
+  }
+  var etichette = [];
+  piazza(TX, TY, ['Tu'], fonte + 2, 12).forEach(function (e) { etichette.push('<text class="etichetta-mappa tu" x="' + e.x.toFixed(1) + '" y="' + e.y.toFixed(1) + '" text-anchor="' + e.a + '">' + esc(e.t) + '</text>'); });
+  grappoli.sort(function (a, b) { return b.membri.length - a.membri.length; }).forEach(function (c) {
+    var nomi = c.membri.map(function (m) { return m.p.breve; }), righe = [];
+    for (var k = 0; k < nomi.length; k += 2) righe.push(nomi.slice(k, k + 2).join(' · '));
+    var r = Math.max.apply(null, c.membri.map(function (m) { return Math.hypot(m.X - c.X, m.Y - c.Y); })) + 6;
+    piazza(c.X, c.Y, righe, fonte, r).forEach(function (e) { etichette.push('<text class="etichetta-mappa" style="font-size:' + fonte + 'px" x="' + e.x.toFixed(1) + '" y="' + e.y.toFixed(1) + '" text-anchor="' + e.a + '">' + esc(e.t) + '</text>'); });
+  });
+  s += etichette.join('') + '</svg>';
+  box.innerHTML = s;
+  $('legenda-mappa').innerHTML = GRUPPI.map(function (g) { return '<span><i class="pallino" style="--c:' + g.colore + '"></i>' + esc(g.nome) + '</span>'; }).join('');
+}
+var attesaMappa = null;
+window.addEventListener('resize', function () {
+  if (!ultimeRisposte || $('s-risultato').hidden) return;
+  clearTimeout(attesaMappa);
+  attesaMappa = setTimeout(function () { disegnaMappa(ultimeRisposte); }, 200);
+});
+
+/* ---------- Stato e navigazione ---------- */
+var ULTIMO = TEMI.length + 2;
+var stato = { passo: 0, risposte: {}, priorita: new Set(), modo: 'rapido', soloNuove: false };
+var risultato = null, evidenza = null;
+
+function mostra(passo) {
+  stato.passo = passo;
+  $('s-apertura').hidden = passo !== 0;
+  $('s-priorita').hidden = passo !== 1;
+  $('s-tema').hidden = !(passo >= 2 && passo < ULTIMO);
+  $('s-risultato').hidden = passo !== ULTIMO;
+  $('avanzamento').hidden = !(passo >= 1 && passo < ULTIMO);
+  if (passo === 1) disegnaPriorita();
+  if (passo >= 2 && passo < ULTIMO) disegnaTema(passo - 2);
+  if (passo === ULTIMO) disegnaRisultato();
+  aggiornaAvanzamento();
+  window.scrollTo(0, 0);
+  var h = document.querySelector('section:not([hidden]) h2');
+  if (h && passo > 0) h.focus({ preventScroll: true });
+}
+function aggiornaAvanzamento() {
+  var p = stato.passo;
+  $('avanzamento-testo').textContent = p === 1 ? 'Priorità' : (p >= 2 && p < ULTIMO) ? 'Tema ' + (p - 1) + ' di ' + TEMI.length : '';
+  var h = '';
+  TEMI.forEach(function (_, i) { h += '<li class="' + (i < p - 2 ? 'fatto' : i === p - 2 ? 'ora' : '') + '"></li>'; });
+  $('tacche').innerHTML = h;
+}
+function affDaMostrare(t) {
+  return t.aff.filter(function (a) {
+    if (!nelTest(a, stato.modo)) return false;
+    return stato.soloNuove ? !a.base : true;
+  });
+}
+function avanti() {
+  if (stato.passo >= 2 && stato.passo < ULTIMO) {
+    var vuote = [].filter.call($('tema-affermazioni').querySelectorAll('.affermazione'), function (f) { return stato.risposte[f.getAttribute('data-id')] === undefined; });
+    if (vuote.length) {
+      vuote.forEach(function (f) { f.classList.add('manca'); });
+      $('tema-avviso').textContent = vuote.length === 1 ? 'Manca una risposta. Puoi anche scegliere «Non so, salta».' : 'Mancano ' + vuote.length + ' risposte. Puoi anche scegliere «Non so, salta».';
+      $('tema-avviso').hidden = false;
+      vuote[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+  }
+  mostra(Math.min(ULTIMO, stato.passo + 1));
+}
+function indietro() {
+  if (stato.soloNuove && stato.passo === 2) { stato.soloNuove = false; stato.modo = 'rapido'; mostra(ULTIMO); return; }
+  mostra(Math.max(0, stato.passo - 1));
+}
+
+function disegnaPriorita() {
+  var box = $('lista-priorita');
+  box.innerHTML = TEMI.map(function (t) {
+    return '<label><input type="checkbox" id="pr-' + t.id + '" value="' + t.id + '"' + (stato.priorita.has(t.id) ? ' checked' : '') + '><span>' + esc(t.nome) + '</span></label>';
+  }).join('');
+  box.onchange = function (e) {
+    if (e.target.checked) stato.priorita.add(e.target.value); else stato.priorita.delete(e.target.value);
+    limita();
+  };
+  limita();
+}
+function limita() {
+  var pieno = stato.priorita.size >= P.maxPriorita;
+  [].forEach.call($('lista-priorita').querySelectorAll('input'), function (c) { c.disabled = pieno && !c.checked; });
+  var n = stato.priorita.size;
+  $('conteggio-priorita').textContent = n === 0 ? 'Nessun tema scelto: tutti peseranno allo stesso modo.' : n + ' di ' + P.maxPriorita + ' scelti.';
+}
+
+function disegnaTema(i) {
+  var t = TEMI[i], lista = affDaMostrare(t);
+  $('tema-etichetta').textContent = 'Tema ' + (i + 1) + ' di ' + TEMI.length + (stato.priorita.has(t.id) ? ' · prioritario' : '');
+  $('tema-titolo').textContent = t.nome;
+  $('tema-avviso').hidden = true;
+  $('b-avanti').textContent = i === TEMI.length - 1 ? 'Guarda il risultato' : 'Tema successivo';
+  $('tema-affermazioni').innerHTML = lista.map(function (a, n) {
+    var r = stato.risposte[a.id];
+    var opzioni = SCALA.map(function (s) {
+      var id = 'r-' + a.id + '-' + (s[0] + 2);
+      return '<label for="' + id + '"><input type="radio" id="' + id + '" name="' + a.id + '" value="' + s[0] + '"' + (r === s[0] ? ' checked' : '') + '><span>' + s[1] + '</span></label>';
+    }).join('');
+    opzioni += '<label class="salta" for="r-' + a.id + '-x"><input type="radio" id="r-' + a.id + '-x" name="' + a.id + '" value="x"' + (r === 'x' ? ' checked' : '') + '><span>Non so, salta</span></label>';
+    return '<div class="affermazione' + (r === 'x' ? ' saltata' : '') + '" data-id="' + a.id + '">' +
+      '<span class="num">' + (n + 1) + ' / ' + lista.length + '</span>' +
+      '<p class="frase" id="f-' + a.id + '">' + esc(a.t) + '</p>' +
+      '<p class="ctx">' + esc(a.ctx) + '</p>' +
+      '<fieldset class="scala"><legend>' + esc(a.t) + '</legend>' + opzioni + '</fieldset></div>';
+  }).join('');
+  $('tema-affermazioni').onchange = function (e) {
+    var v = e.target.value;
+    stato.risposte[e.target.name] = v === 'x' ? 'x' : Number(v);
+    var f = e.target.closest('.affermazione');
+    f.classList.remove('manca'); f.classList.toggle('saltata', v === 'x');
+    if (!$('tema-affermazioni').querySelector('.manca')) $('tema-avviso').hidden = true;
+  };
+}
+
+/* ---------- Risultato ---------- */
+function ordine(r) {
+  return GRUPPI.map(function (_, i) { return i; }).filter(function (i) { return r.seggi[i] > 0; })
+    .sort(function (a, b) { return r.seggi[b] - r.seggi[a] || r.affinita[b] - r.affinita[a]; });
+}
+function ordinePolitici(r) {
+  return POLITICI.map(function (_, i) { return i; }).sort(function (a, b) { return r.affP[b] - r.affP[a] || r.docP[b] - r.docP[a]; });
+}
+function verdetto(r) {
+  var o = ordine(r), n = r.seggi[o[0]];
+  if (n >= P.maggioranza) return GRUPPI[o[0]].nome + ': maggioranza da soli con ' + n + ' seggi.';
+  var pari = o.filter(function (i) { return r.seggi[i] === n; });
+  if (pari.length > 1) return 'Nessuno arriva a 218. In testa, alla pari, ' + elenco(pari.map(function (i) { return GRUPPI[i].nome; })) + ' con ' + n + ' seggi.';
+  return 'Nessuno arriva a 218. In testa ' + GRUPPI[o[0]].nome + ', con ' + n + ' seggi.';
+}
+function totaliPartito(r) {
+  var d = 0, rep = 0;
+  r.seggi.forEach(function (n, i) { if (GRUPPI[i].partito === 'd') d += n; else rep += n; });
+  return { d: d, r: rep };
+}
+function contaVerifiche(g) {
+  var c = { a: 0, b: 0, c: 0 };
+  AFF.forEach(function (a) { c[a.liv.charAt(g)]++; });
+  return c;
+}
+function disegnaRisultato() {
+  var r = calcola(stato.risposte, stato.priorita);
+  if (r.vuoto) {
+    risultato = null;
+    $('verdetto').textContent = 'Hai saltato tutte le affermazioni.';
+    $('verdetto-sotto').textContent = 'Per vedere il tuo emiciclo serve almeno una risposta.';
+    ['grafico', 'gruppi', 'partiti', 'podio', 'disaccordi', 'mappa', 'coalizioni', 'vicinanze', 'temi'].forEach(function (id) { $(id).innerHTML = ''; });
+    $('lontani').textContent = ''; $('titolo-disaccordi').textContent = ''; $('governo-testo').textContent = ''; $('didascalia').textContent = '';
+    return;
+  }
+  risultato = r; evidenza = null;
+  var gruppoSeggio = [], colori = [];
+  r.seggi.forEach(function (n, g) { for (var i = 0; i < n; i++) { gruppoSeggio.push(g); colori.push(GRUPPI[g].colore); } });
+  $('verdetto').textContent = verdetto(r);
+  var prio = [].slice.call(stato.priorita).map(function (id) { return TEMI.filter(function (t) { return t.id === id; })[0].nome.toLowerCase(); });
+  $('verdetto-sotto').textContent = 'Calcolato su ' + r.contate + ' affermazioni' + (r.saltate ? ' (' + r.saltate + ' saltate)' : '') + (prio.length ? ', con ' + elenco(prio) + ' come priorità' : '') + '.';
+  $('grafico').innerHTML = svgEmiciclo(colori, gruppoSeggio);
+  $('grafico').classList.remove('evidenzia');
+  $('didascalia').textContent = 'La linea al centro segna la maggioranza: 218 seggi su 435. Tocca una corrente per evidenziarla.';
+  $('gruppi').innerHTML = GRUPPI.map(function (g, i) {
+    return '<li data-g="' + i + '" class="' + (r.seggi[i] ? '' : 'fuori') + '" style="--c:' + g.colore + '" tabindex="0">' +
+      '<span class="pallino"></span><span class="nome">' + esc(g.nome) + '<small>' + esc(g.volti) + '</small></span><span class="n">' + r.seggi[i] + '</span></li>';
+  }).join('');
+  var tp = totaliPartito(r);
+  $('partiti').innerHTML =
+    '<div class="partito d"><span class="dida">Area democratica</span><span class="cifra">' + tp.d + '</span><span class="dida">' + (tp.d >= P.maggioranza ? 'Maggioranza: Speaker democratico' : 'seggi') + '</span></div>' +
+    '<div class="partito r"><span class="dida">Area repubblicana</span><span class="cifra">' + tp.r + '</span><span class="dida">' + (tp.r >= P.maggioranza ? 'Maggioranza: Speaker repubblicano' : 'seggi') + '</span></div>';
+
+  // politici
+  var op = ordinePolitici(r);
+  $('podio').innerHTML = op.slice(0, 5).map(function (i, n) {
+    var p = POLITICI[i], g = GRUPPI[p.g];
+    return '<li class="' + (n === 0 ? 'primo' : '') + '" style="--c:' + g.colore + '"><span class="pos">' + (n + 1) + '</span>' +
+      '<span class="chi"><i class="pallino"></i>' + esc(p.nome) + '<small>' + esc(p.ruolo) + ' · ' + esc(g.nome) + '</small></span>' +
+      '<span class="pct">' + pct(r.affP[i]) + '</span>' +
+      '<div class="pista"><span style="width:' + (r.affP[i] * 100).toFixed(1) + '%"></span></div>' +
+      '<span class="doc">Posizioni documentate su queste affermazioni: ' + r.docP[i] + ' su ' + r.contate + '</span></li>';
+  }).join('');
+  var ultimi = op.slice(-3).reverse();
+  $('lontani').innerHTML = 'I più lontani da te: ' + elenco(ultimi.map(function (i) { return '<strong>' + esc(POLITICI[i].nome) + '</strong> (' + pct(r.affP[i]) + ')'; })) + '.';
+
+  // disaccordi con il più vicino
+  var primo = POLITICI[op[0]];
+  var diff = AFF.filter(function (a) { return numero(stato.risposte[a.id]); })
+    .map(function (a) { return { a: a, d: Math.abs(stato.risposte[a.id] - posPol(primo, a)) }; })
+    .filter(function (x) { return x.d >= 2; })
+    .sort(function (x, y) { return y.d - x.d || (livPol(primo, x.a) < livPol(primo, y.a) ? -1 : 1); }).slice(0, 3);
+  $('titolo-disaccordi').textContent = 'Su cosa non sei d’accordo con ' + primo.nome;
+  if (!diff.length) $('disaccordi').innerHTML = '<li><span class="confronto">Non c’è nessuna affermazione su cui siate distanti più di un punto.</span></li>';
+  else $('disaccordi').innerHTML = diff.map(function (x) {
+    var s = primo.sc[x.a.id], liv = livPol(primo, x.a);
+    var nota = s && s[2] ? s[2] : (liv === 'c' ? 'Posizione stimata dalla sua corrente.' : '');
+    return '<li><span class="frase">' + esc(x.a.t) + '</span>' +
+      '<span class="confronto">Tu: <b>' + ESTESA[stato.risposte[x.a.id]] + '</b> · ' + esc(primo.breve) + ': <b>' + ESTESA[posPol(primo, x.a)] + '</b>' + (nota ? '. ' + esc(nota) : '') + '</span></li>';
+  }).join('');
+
+  disegnaMappa(stato.risposte);
+
+  // speaker e coalizioni
+  var cs = coalizioni(r.seggi, stato.priorita).slice(0, 4), o = ordine(r);
+  $('governo-testo').textContent = r.seggi[o[0]] >= P.maggioranza
+    ? GRUPPI[o[0]].nome + ': eleggono lo Speaker da soli. Ecco comunque le maggioranze minime più omogenee.'
+    : 'Per eleggere lo Speaker servono 218 voti. Nella realtà ogni partito vota compatto il proprio candidato; qui le correnti devono trovare un accordo. Le maggioranze minime possibili, dalla più omogenea:';
+  $('coalizioni').innerHTML = cs.map(function (c) {
+    var membri = c.membri.slice().sort(function (a, b) { return a - b; });
+    var trasv = membri.some(function (i) { return GRUPPI[i].partito === 'd'; }) && membri.some(function (i) { return GRUPPI[i].partito === 'r'; });
+    return '<li class="coalizione"><div class="riga"><span class="chi">' + membri.map(function (i) { return esc(GRUPPI[i].nome); }).join(' + ') + '</span>' +
+      '<span class="quanti">' + c.seggi + ' seggi · omogeneità ' + pct(c.coesione) + (trasv ? ' · bipartisan' : '') + '</span></div>' +
+      '<div class="pista">' + membri.map(function (i) { return '<span style="--c:' + GRUPPI[i].colore + ';width:' + (r.seggi[i] / P.seggi * 100).toFixed(2) + '%"></span>'; }).join('') + '<i class="meta"></i></div></li>';
+  }).join('');
+
+  var perAff = GRUPPI.map(function (_, i) { return i; }).sort(function (a, b) { return r.affinita[b] - r.affinita[a]; });
+  $('vicinanze').innerHTML = perAff.map(function (i) {
+    var g = GRUPPI[i], v = contaVerifiche(i);
+    return '<li style="--c:' + g.colore + '"><span class="nome"><i class="pallino"></i>' + esc(g.nome) + ' <small>· ' + esc(g.volti) + '</small></span><span class="pct">' + pct(r.affinita[i]) + '</span>' +
+      '<div class="pista"><span style="width:' + (r.affinita[i] * 100).toFixed(1) + '%"></span></div><p class="profilo">' + esc(g.profilo) + '</p>' +
+      '<p class="verifica">Posizioni con fonte: ' + (v.a + v.b) + ' su ' + AFF.length + ' (voti o atti ufficiali: ' + v.a + '). Le altre ' + v.c + ' sono stime.</p></li>';
+  }).join('');
+
+  var righe = TEMI.map(function (t) {
+    var v = r.perTema[t.id], vp = r.perTemaP[t.id];
+    if (!v) return '<tr><th scope="row">' + esc(t.nome) + '</th><td colspan="2" class="pct">Nessuna risposta</td></tr>';
+    var max = Math.max.apply(null, v), primi = [];
+    v.forEach(function (x, i) { if (max - x < 1e-9) primi.push(i); });
+    var cg = primi.length > 3 ? 'Più correnti alla pari' : primi.map(function (i) { return '<span class="chi-g"><i class="pallino" style="--c:' + GRUPPI[i].colore + '"></i>' + esc(GRUPPI[i].nome) + '</span>'; }).join('');
+    var maxp = Math.max.apply(null, vp), pp = [];
+    vp.forEach(function (x, i) { if (maxp - x < 1e-9) pp.push(i); });
+    var cp = pp.length > 3 ? esc(POLITICI[pp[0]].breve) + ' e altri ' + (pp.length - 1) : pp.map(function (i) { return esc(POLITICI[i].nome); }).join(', ');
+    return '<tr><th scope="row">' + esc(t.nome) + (stato.priorita.has(t.id) ? ' ★' : '') + '</th><td>' + cg + ' <span class="pct">' + pct(max) + '</span></td><td>' + cp + ' <span class="pct">' + pct(maxp) + '</span></td></tr>';
+  });
+  $('temi').innerHTML = '<thead><tr><th scope="col">Tema</th><th scope="col">Corrente più vicina</th><th scope="col">Politico più vicino</th></tr></thead><tbody>' + righe.join('') + '</tbody>';
+
+  var bc = $('b-completa');
+  if (stato.modo === 'rapido') { bc.hidden = false; bc.textContent = 'Aggiungi le altre ' + (conta('completo') - conta('rapido')) + ' affermazioni'; }
+  else bc.hidden = true;
+  $('esito').textContent = ''; $('copia-riserva').hidden = true;
+}
+
+function aggiornaEvidenza(g) {
+  if (!risultato) return;
+  evidenza = g;
+  var box = $('grafico');
+  box.classList.toggle('evidenzia', g !== null);
+  [].forEach.call(box.querySelectorAll('.seggio'), function (c) { c.classList.toggle('scelto', g !== null && Number(c.getAttribute('data-g')) === g); });
+  $('didascalia').textContent = g === null ? 'La linea al centro segna la maggioranza: 218 seggi su 435. Tocca una corrente per evidenziarla.'
+    : GRUPPI[g].nome + ': ' + risultato.seggi[g] + ' seggi, affinità ' + pct(risultato.affinita[g]) + '.';
+}
+
+/* ---------- Copia ---------- */
+function testoRisultato(r) {
+  var op = ordinePolitici(r).slice(0, 3);
+  var righe = ['La mia Camera USA: ' + verdetto(r)];
+  righe.push('Politici più vicini: ' + op.map(function (i) { return POLITICI[i].nome + ' ' + pct(r.affP[i]); }).join(', ') + '.');
+  GRUPPI.forEach(function (g, i) { if (r.seggi[i]) righe.push(g.nome + ': ' + r.seggi[i]); });
+  var tp = totaliPartito(r);
+  righe.push('Area democratica ' + tp.d + ', area repubblicana ' + tp.r + '.');
+  return righe.join('\n');
+}
+function copia() {
+  if (!risultato) return;
+  var t = testoRisultato(risultato);
+  function riserva() {
+    var ta = $('copia-riserva'); ta.value = t; ta.hidden = false; ta.focus(); ta.select();
+    $('esito').textContent = 'Copia automatica non disponibile: il testo è selezionato qui sotto.';
+  }
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { $('esito').textContent = 'Risultato copiato negli appunti.'; }, riserva);
+    else riserva();
+  } catch (e) { riserva(); }
+}
+
+/* ---------- Tabella e politici documentati ---------- */
+function segno(v) { return v > 0 ? '+' + v : v < 0 ? '−' + Math.abs(v) : '0'; }
+function disegnaTabella() {
+  var h = '<thead><tr><th scope="col">Affermazione e fonti</th>' + GRUPPI.map(function (g) { return '<th scope="col" style="--c:' + g.colore + '"><i class="pallino"></i><abbr title="' + esc(g.nome) + '">' + esc(g.cod) + '</abbr></th>'; }).join('') + '</tr></thead><tbody>';
+  TEMI.forEach(function (t) {
+    h += '<tr class="tema-riga"><th colspan="' + (GRUPPI.length + 1) + '">' + esc(t.nome) + '</th></tr>';
+    t.aff.forEach(function (a) {
+      h += '<tr><td>' + esc(a.t) + (a.base ? '' : ' <em>(test completo)</em>') + '<span class="fonte">' + esc(a.fonte) + '</span></td>' +
+        a.p.map(function (v, g) { var st = a.liv.charAt(g) === 'c'; return '<td' + (st ? ' class="stima" title="Stima: nessuna fonte specifica"' : ' title="' + LIVELLI[a.liv.charAt(g)] + '"') + '>' + segno(v) + (st ? '*' : '') + '</td>'; }).join('') + '</tr>';
+    });
+  });
+  $('tabella').innerHTML = h + '</tbody>';
+  $('legenda').innerHTML = GRUPPI.map(function (g) { return '<span><strong>' + esc(g.cod) + '</strong> ' + esc(g.nome) + '</span>'; }).join('') + '<span><strong>*</strong> stima</span>';
+}
+function disegnaEsplora() {
+  var sel = $('sel-politico');
+  sel.innerHTML = POLITICI.map(function (p, i) { return '<option value="' + i + '">' + esc(p.nome) + ' · ' + esc(GRUPPI[p.g].nome) + '</option>'; }).join('');
+  function aggiorna() {
+    var p = POLITICI[Number(sel.value)];
+    var doc = AFF.filter(function (a) { return p.sc[a.id] && p.sc[a.id][1] !== 'c'; });
+    var nA = doc.filter(function (a) { return p.sc[a.id][1] === 'a'; }).length;
+    $('esplora-conto').textContent = p.ruolo + '. Posizioni documentate: ' + doc.length + ' su ' + AFF.length + ' (' + nA + ' da voti o atti ufficiali). Le altre sono quelle della corrente «' + GRUPPI[p.g].nome + '» o stime.';
+    $('esplora-lista').innerHTML = doc.map(function (a) {
+      var s = p.sc[a.id];
+      return '<li><span class="val">' + segno(s[0]) + '</span> ' + esc(a.t) + (s[2] ? ' <span class="nota">— ' + esc(s[2]) + '</span>' : '') + '</li>';
+    }).join('');
+  }
+  sel.onchange = aggiorna;
+  aggiorna();
+}
+
+/* ---------- Avvio ---------- */
+function rifai() { stato = { passo: 0, risposte: {}, priorita: new Set(), modo: 'rapido', soloNuove: false }; risultato = null; mostra(0); }
+$('n-rapido').textContent = conta('rapido');
+$('n-completo').textContent = conta('completo');
+$('n-politici').textContent = POLITICI.length;
+$('n-politici-2').textContent = POLITICI.length;
+$('volti-apertura').textContent = 'Tra i politici di riferimento: ' + POLITICI.map(function (p) { return p.nome; }).join(', ') + '.';
+emicicloVuoto();
+disegnaTabella();
+disegnaEsplora();
+
+document.addEventListener('click', function (e) {
+  var m = e.target.closest('[data-modo]');
+  if (m) { stato.modo = m.getAttribute('data-modo'); stato.soloNuove = false; mostra(1); return; }
+  var b = e.target.closest('[data-vai]');
+  if (b) { if (b.getAttribute('data-vai') === 'avanti') avanti(); else indietro(); }
+});
+$('b-copia').addEventListener('click', copia);
+$('b-rifai').addEventListener('click', rifai);
+$('b-completa').addEventListener('click', function () { stato.modo = 'completo'; stato.soloNuove = true; mostra(2); });
+$('marchio').addEventListener('click', function () { if (stato.passo !== 0) rifai(); });
+var lista = $('gruppi'), graf = $('grafico');
+function scegli(li) { if (!li) return; var g = Number(li.getAttribute('data-g')); aggiornaEvidenza(evidenza === g ? null : g); }
+lista.addEventListener('click', function (e) { scegli(e.target.closest('li')); });
+lista.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scegli(e.target.closest('li')); } });
+graf.addEventListener('click', function (e) { var c = e.target.closest('.seggio'); if (!c) { aggiornaEvidenza(null); return; } var g = Number(c.getAttribute('data-g')); aggiornaEvidenza(evidenza === g ? null : g); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && evidenza !== null) aggiornaEvidenza(null); });
+
+// per i controlli automatici
+window.__camera = { calcola: calcola, stato: function () { return stato; }, AFF: AFF, POLITICI: POLITICI, proiettore: proiettore, posPol: posPol };
+})();
+</script>
+</body>
+</html>
